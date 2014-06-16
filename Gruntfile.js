@@ -5,7 +5,7 @@ module.exports = function(grunt) {
 
 
     jshint: {
-      all: ['Gruntfile.js', 'lib/**/*.js']
+      all: ['Gruntfile.js', 'lib/**/*.js', 'test/app/js']
     },
 
     mochaTest: {
@@ -13,7 +13,7 @@ module.exports = function(grunt) {
         options: {
           reporter: 'spec'
         },
-        src: ['test/**/*.js']
+        src: ['test/spec/*.js']
       }
     }
 

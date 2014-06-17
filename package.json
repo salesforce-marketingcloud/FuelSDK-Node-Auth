@@ -21,6 +21,7 @@
     "express": "^4.4.3"
   },
   "dependencies": {
-    "request": "^2.36.0"
+    "request": "^2.36.0",
+    "lodash": "^2.4.1"
   }
 }

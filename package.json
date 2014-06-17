@@ -21,8 +21,6 @@
     "express": "^4.4.3"
   },
   "dependencies": {
-    "underscore": "^1.6.0",
-    "request": "^2.36.0",
-    "xml2js": "^0.4.4"
+    "request": "^2.36.0"
   }
 }

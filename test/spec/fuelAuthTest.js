@@ -35,7 +35,8 @@ describe('fuelAuth', function () {
 	});
 
 	it('should get a new token', function(done) {
-		client.should.be.an.Object;
+		console.log(client.getAccessToken());
+		//client.getAccessToken.should.be.an.Object;
 		done();
 	});
 

@@ -1,7 +1,7 @@
 {
-  "name": "node-fuelAuth",
+  "name": "Fuel-Node-Auth",
   "version": "0.0.1",
-  "description": "node-fuelAuth",
+  "description": "Node Library for Authenticating with ExactTarget Fuel.",
   "main": "./lib/fuelAuth.js",
   "scripts": {
     "test": "mocha test/spec"

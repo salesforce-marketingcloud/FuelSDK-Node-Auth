@@ -3,7 +3,6 @@ Fuel Node Auth
 
 This library allows users to create authentication clients for ExactTarget APIs. Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level.
 
-
 ###Setting up the client
 
 ```js
@@ -11,7 +10,7 @@ var FuelNodeAuth = require( 'fuel-node-auth' );
 
 // Required Settings
 var clientId     = 'yourClientId';
-var clientSecret = 'yourClientSecrete';
+var clientSecret = 'yourClientSecret';
 
 // Optional Settings
 var authUrl = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default

@@ -2,13 +2,13 @@
   "name": "Fuel-Node-Auth",
   "version": "0.0.1",
   "description": "Node Library for Authenticating with ExactTarget Fuel.",
-  "main": "./lib/fuelAuth.js",
+  "main": "./lib/fuel-node-auth.js",
   "scripts": {
     "test": "mocha test/spec"
   },
   "repository": {
     "type": "git",
-    "url": "git@github.exacttarget.com:kandrews/node-fuelAuth.git"
+    "url": "git@github.com:ExactTarget/Fuel-Node-Auth.git"
   },
   "author": "",
   "license": "MIT",

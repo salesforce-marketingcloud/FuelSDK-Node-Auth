@@ -4,7 +4,7 @@
   "description": "Node Library for Authenticating with ExactTarget Fuel. Used for authenticating REST and SOAP APIs.",
   "main": "./lib/fuel-node-auth.js",
   "scripts": {
-    "test": "mocha --reporter=spec test/spec"
+    "test": "grunt jshint && mocha --reporter=spec test/spec"
   },
   "repository": {
     "type": "git",

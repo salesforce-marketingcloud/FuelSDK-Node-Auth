@@ -9,8 +9,8 @@ This library allows users to create authentication clients for ExactTarget APIs.
 var FuelNodeAuth = require( 'fuel-node-auth' );
 
 // Required Settings
-var clientId     = 'yourClientId';
-var clientSecret = 'yourClientSecret';
+var myClientId     = 'yourClientId';
+var myClientSecret = 'yourClientSecret';
 
 // Optional Settings
 var authUrl = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
@@ -20,9 +20,30 @@ var refreshToken = "";
 var accessToken  = "";
 var expiration   = "";
 
-
 // Create new client - optional settings are passed in here
-var client = new FuelNodeAuth({ "clientId": clientId, "clientSecret": clientSecret });
+var FuelAuthClient = new FuelNodeAuth({
+	clientId: myClientId
+	, clientSecret: myClientSecret
+});
+
+// will get called when we have an error
+FuelAuthClient.on( 'token:error', function( err ) {
+	'use strict';
+
+	console.log( err );
+});
+
+// will get called when we have a successful token retrieval
+FuelAuthClient.on( 'token:success', function( token ) {
+	// { accessToken: "et28bk6ng36q5ratsk9rhn24", expiresIn: 3600 }
+	'use strict';
+
+	console.log( res );
+});
+
+// telling the client to actually get a token
+// or return it if it's there and not expired
+FuelAuthClient.getAccessToken();
 ```
 
 ###API Access

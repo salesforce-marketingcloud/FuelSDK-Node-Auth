@@ -3,13 +3,42 @@ Fuel Node Auth
 
 This library allows users to create authentication clients for ExactTarget APIs. Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level.
 
-##API Access
+## Accessing ExactTarget's API
 
 Making requests to our API should be done using our [REST][1] and [SOAP][2] clients.
 
 This is a new library and requires extensive testing.  We are currently working to develop a test suite, but real world testing is also welcomed. Feel free to test it out and submit issues as they are found.
 
-##Setting up the client
+## API
+
+### getAccessToken( requestOptions, callback, context, forceRequest )
+
+#### requestOptions
+
+Type: `Object`
+
+Extra options that will be deep merged into options used when token is requested
+
+#### callback
+
+Type: `Function`  
+
+Function that will be executed after token request completes
+
+#### context
+
+Type: `Object`
+
+Context that callback will be executed in.
+
+#### forceRequest
+
+Type: `Boolean`
+
+If true, token will always be requested from API regardless of expiration
+
+
+## Setting up the client
 
 ```js
 var FuelNodeAuth = require( 'fuel-node-auth' );
@@ -36,9 +65,9 @@ var FuelAuthClient = new FuelNodeAuth({
 	, expiration: expiration
 });
 ```
-##Using the Client
+## Examples
 
-###Events
+### Events
 ```js
 var requestOptions = {}; // extra options to be passed in and used on request
 
@@ -55,17 +84,17 @@ FuelAuthClient.on( 'token:success', function( token ) {
 // telling the client to actually get a token
 // or return it if it's there and not expired
 // requestOptions are not required
-FuelAuthClient.getAccessToken( requestOptions );
+FuelAuthClient.getAccessToken();
 ```
 
-####Events Emitted
+#### Events Emitted
 
 | Event | Fired When... | Data Returned |
 | ----- | ------------- | ---- |
 | token:success | a token was successfully retrieved. This could mean the token was fetched from the API, or it was just returned because it hadn't expired or returned | `"token-from-api-returned"` |
 | token:error | there was an error in the request to the API | error from request |
 
-###Callbacks
+### Callbacks
 
 ```js
 // extra options to be passed in and used on request
@@ -84,6 +113,10 @@ FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
 	console.log( err, token );
 }, global );
 ```
+
+## License
+
+MIT?
 
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP

@@ -40,6 +40,8 @@ var FuelAuthClient = new FuelNodeAuth({
 
 ###Events
 ```js
+var requestOptions = {}; // extra options to be passed in and used on request
+
 // will get called when we have an error
 FuelAuthClient.on( 'token:error', function( err ) {
 	console.log( err );
@@ -52,7 +54,8 @@ FuelAuthClient.on( 'token:success', function( token ) {
 
 // telling the client to actually get a token
 // or return it if it's there and not expired
-FuelAuthClient.getAccessToken();
+// requestOptions are not required
+FuelAuthClient.getAccessToken( requestOptions );
 ```
 
 ####Events Emitted
@@ -65,14 +68,18 @@ FuelAuthClient.getAccessToken();
 ###Callbacks
 
 ```js
+// extra options to be passed in and used on request
+// has to be an object or null when using callback
+var requestOptions = {};
+
 // using a callback without context
-FuelAuthClient.getAccessToken( function( err, token ) {
+FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
 	// function will be executed in context of FuelAuthClient
 	console.log( err, token );
 });
 
 // using a callback with specfic context
-FuelAuthClient.getAccessToken( function( err, token ) {
+FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
 	// function will be executed in context of global
 	console.log( err, token );
 }, global );

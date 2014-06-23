@@ -11,31 +11,36 @@ This is a new library and requires extensive testing.  We are currently working 
 
 ## API
 
-### getAccessToken( requestOptions, callback, context, forceRequest )
+#### getAccessToken( requestOptions, callback, context, forceRequest )
 
-#### requestOptions
+##### requestOptions
 
 Type: `Object`
 
 Extra options that will be deep merged into options used when token is requested
 
-#### callback
+##### callback
 
 Type: `Function`  
 
 Function that will be executed after token request completes
 
-#### context
+##### context
 
 Type: `Object`
 
 Context that callback will be executed in.
 
-#### forceRequest
+##### forceRequest
 
 Type: `Boolean`
 
 If true, token will always be requested from API regardless of expiration
+
+#### checkExpired()
+
+Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
+
 
 
 ## Setting up the client
@@ -84,7 +89,7 @@ FuelAuthClient.on( 'token:success', function( token ) {
 // telling the client to actually get a token
 // or return it if it's there and not expired
 // requestOptions are not required
-FuelAuthClient.getAccessToken();
+FuelAuthClient.getAccessToken( requestOptions );
 ```
 
 #### Events Emitted

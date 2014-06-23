@@ -119,9 +119,5 @@ FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
 }, global );
 ```
 
-## License
-
-MIT?
-
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP

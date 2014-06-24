@@ -4,20 +4,18 @@
   "description": "Node Library for Authenticating with ExactTarget Fuel. Used for authenticating REST and SOAP APIs.",
   "main": "./lib/fuel-node-auth.js",
   "scripts": {
-    "test": "grunt jshint && mocha --reporter=spec test/spec"
+    "test": "grunt jshint && mocha --reporter=spec test/main.js"
   },
   "repository": {
     "type": "git",
     "url": "git@github.com:ExactTarget/Fuel-Node-Auth.git"
   },
   "author": "",
-  "license": "MIT",
   "devDependencies": {
-    "express": "~4.4.3",
     "grunt": "~0.4.5",
     "grunt-contrib-jshint": "~0.10.0",
     "mocha": "~1.20.1",
-    "should": "~4.0.4"
+    "chai": "~1.9.1"
   },
   "dependencies": {
     "request": "~2.36.0",

@@ -11,7 +11,7 @@ This is a new library and requires extensive testing.  We are currently working 
 
 ## API
 
-1. **getAccessToken( requestOptions, forceRequest, callback, context )**
+1. **getAccessToken( requestOptions, forceRequest, callback )**
 	* requestOptions
 		* Type: `Object`
 		* Extra options that will be deep merged into options used when token is requested
@@ -21,9 +21,6 @@ This is a new library and requires extensive testing.  We are currently working 
 	* callback
 		* Type: `Function`  
 		* Function that will be executed after token request completes
-	* context
-		* Type: `Object`
-		* Context that callback will be executed in.
 2. **checkExpired()**
 	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
 

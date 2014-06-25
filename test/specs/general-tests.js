@@ -2,7 +2,7 @@
 var expect = require( 'chai' ).expect;
 
 // module to test
-var FuelNodeAuth = require( '../lib/fuel-node-auth' );
+var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
 
 describe( 'General Tests', function() {
 	'use strict';
@@ -18,7 +18,7 @@ describe( 'General Tests', function() {
 		try {
 			AuthClient = new FuelNodeAuth();
 		} catch( err ) {
-			expect( err.message ).to.equal( 'clientId or clientSecret is missing or invalid' );
+			expect( err.message ).to.equal( 'options are required. see readme.' );
 		}
 
 		// testing with clientId passed into constructor

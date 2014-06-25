@@ -2,7 +2,7 @@
 var expect = require( 'chai' ).expect;
 
 // module to test
-var FuelNodeAuth = require( '../lib/fuel-node-auth' );
+var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
 
 describe( 'Function - isExpired', function () {
 	'use strict';
@@ -19,6 +19,16 @@ describe( 'Function - isExpired', function () {
 		expect( AuthClient.isExpired() ).to.be.false;
 	});
 
+	it( 'should return true when there is no accessToken but has not expired based on time', function() {
+		var AuthClient = new FuelNodeAuth({
+			clientId: 'test'
+			, clientSecret: 'test'
+			, expiration: 3600 // faking
+		});
+
+		expect( AuthClient.isExpired() ).to.be.true;
+	});
+
 	it( 'should return true when token is expired based on time', function( done ) {
 		var AuthClient = new FuelNodeAuth({
 			clientId: 'test'
@@ -32,15 +42,5 @@ describe( 'Function - isExpired', function () {
 			expect( AuthClient.isExpired() ).to.be.true;
 			done();
 		}, 1000 );
-	});
-
-	it( 'should return true when there is no accessToken but has not expired based on time', function() {
-		var AuthClient = new FuelNodeAuth({
-			clientId: 'test'
-			, clientSecret: 'test'
-			, expiration: 3600 // faking
-		});
-
-		expect( AuthClient.isExpired() ).to.be.true;
 	});
 });

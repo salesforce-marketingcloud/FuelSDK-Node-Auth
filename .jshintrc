@@ -18,7 +18,8 @@
   "unused": true,
   "globals": {
     "require": true,
-    "requirejs": true,
+    "before": true,
+    "after": true,
     "define": true,
     "describe": true,
     "it": true,

@@ -105,6 +105,10 @@ FuelAuthClient.getAccessToken( requestOptions, force, function( err, token ) {
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
+* **0.2.0** - 6/25/14
+    * refactored object constructor
+    * removed context from getAccessToken API
+    * docs/readme updates
 * **0.1.1** - 6/23/14
     * readme updates
 * **0.1.0** - 6/23/14

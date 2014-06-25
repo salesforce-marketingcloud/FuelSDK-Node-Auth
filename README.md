@@ -11,19 +11,19 @@ This is a new library and requires extensive testing.  We are currently working 
 
 ## API
 
-1. **getAccessToken( requestOptions, forceRequest, callback, context )**
+1. **getAccessToken( requestOptions, forceRequest, callback )**
 	* requestOptions
+		* required: no
 		* Type: `Object`
 		* Extra options that will be deep merged into options used when token is requested
 	* forceRequest
+		* required: no
 		* Type: `Boolean`
 		* If true, token will always be requested from API regardless of expiration
 	* callback
+		* required: no
 		* Type: `Function`  
 		* Function that will be executed after token request completes
-	* context
-		* Type: `Object`
-		* Context that callback will be executed in.
 2. **checkExpired()**
 	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
 
@@ -36,15 +36,18 @@ var FuelNodeAuth = require( 'fuel-node-auth' );
 var myClientId     = 'yourClientId';
 var myClientSecret = 'yourClientSecret';
 
-// Optional Settings
-var authUrl = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
+// Minimal Initialization
+var FuelAuthClient = new FuelNodeAuth({
+	clientId: myClientId // required
+	, clientSecret: myClientSecret // required
+});
 
-// Used with SSO - will be created for you if not provided
-var refreshToken = "";
-var accessToken  = "";
-var expiration   = "";
+// Initialization with extra options
+var refreshToken = ""; // Used with SSO - will be created for you if not provided
+var accessToken  = ""; // Used with SSO - will be created for you if not provided
+var expiration   = ""; // Used with SSO - will be created for you if not provided
+var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
 
-// Create new client - optional settings are passed in here
 var FuelAuthClient = new FuelNodeAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
@@ -56,9 +59,10 @@ var FuelAuthClient = new FuelNodeAuth({
 ```
 ## Examples
 
-### Events
+### Using Events
 ```js
 var requestOptions = {}; // extra options to be passed in and used on request
+var force          = null; // default
 
 // will get called when we have an error
 FuelAuthClient.on( 'token:error', function( err ) {
@@ -70,10 +74,9 @@ FuelAuthClient.on( 'token:success', function( token ) {
 	console.log( token );
 });
 
-// telling the client to actually get a token
+// telling the client to get a token from the API
 // or return it if it's there and not expired
-// requestOptions are not required
-FuelAuthClient.getAccessToken( requestOptions );
+FuelAuthClient.getAccessToken( requestOptions, force );
 ```
 
 #### Events Emitted
@@ -83,25 +86,42 @@ FuelAuthClient.getAccessToken( requestOptions );
 | token:success | a token was successfully retrieved. This could mean the token was fetched from the API, or it was just returned because it hadn't expired or returned | `"token-from-api-returned"` |
 | token:error | there was an error in the request to the API | error from request |
 
-### Callbacks
+### Using Callbacks
 
 ```js
-// extra options to be passed in and used on request
-// has to be an object or null when using callback
-var requestOptions = {};
+var requestOptions = {}; // extra options to be passed in and used on request
+var force          = null; // default
 
-// using a callback without context
-FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
-	// function will be executed in context of FuelAuthClient
+FuelAuthClient.getAccessToken( requestOptions, force, function( err, token ) {
 	console.log( err, token );
 });
-
-// using a callback with specfic context
-FuelAuthClient.getAccessToken( requestOptions, function( err, token ) {
-	// function will be executed in context of global
-	console.log( err, token );
-}, global );
 ```
+## Contributors
+
+*In alphabetical order*
+
+* Kelly Andrews - [twitter](https://twitter.com/kellyjandrews), [github](https://github.com/kellyjandrews)
+* Alex Vernacchia - [twitter](https://twitter.com/vernacchia), [github](https://github.com/vernak2539)
+* Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
+
+## ChangeLog
+* **0.2.0** - 6/25/14
+    * refactored object constructor
+    * removed context from getAccessToken API
+    * docs/readme updates
+* **0.1.1** - 6/23/14
+    * readme updates
+* **0.1.0** - 6/23/14
+    * adding callbacks to getAccessToken API
+	* adding ability to pass extra request options to getAccessToken API
+	* adding ability to force token request from ExactTarget API
+	* adding check for expired token
+* **0.0.1** - 6/22/14
+    * added event emitter for delivery of data
+	* setup travis
+	* refactoring of unit tests
+	* semantic changes
+	* initial commits
 
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP

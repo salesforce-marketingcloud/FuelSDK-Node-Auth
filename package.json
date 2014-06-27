@@ -16,7 +16,8 @@
     "grunt-contrib-jshint": "~0.10.0",
     "mocha": "~1.20.1",
     "chai": "~1.9.1",
-    "body-parser": "~1.4.3"
+    "body-parser": "~1.4.3",
+    "sinon": "^1.10.2"
   },
   "dependencies": {
     "request": "~2.36.0",

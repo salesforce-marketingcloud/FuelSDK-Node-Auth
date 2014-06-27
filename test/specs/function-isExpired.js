@@ -1,46 +1,52 @@
-// testing libraries
-var expect = require( 'chai' ).expect;
-
-// module to test
-var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
+var expect          = require( 'chai' ).expect;
+var mockServer      = require( '../mock-server' );
+var FuelNodeAuth    = require( '../../lib/fuel-node-auth' );
+var port            = 4550;
+var localhost       = 'http://127.0.0.1:' + port;
 
 describe( 'Function - isExpired', function () {
 	'use strict';
 
-	it( 'should return false when token is not expired and accessToken is present', function() {
-		var AuthClient = new FuelNodeAuth({
-			clientId: 'test'
-			, clientSecret: 'test'
-			, expiration: 3600 // faking
-		});
+	var server;
 
-		AuthClient.accessToken = '1234556778866'; // faking that we have an accessToken
-
-		expect( AuthClient.isExpired() ).to.be.false;
+	before( function() {
+		server = mockServer( port );
 	});
 
-	it( 'should return true when there is no accessToken but has not expired based on time', function() {
+	after(function() {
+		server.close();
+	});
+
+	it( 'should return true when there is no expiration set and no accessToken (expired)', function() {
 		var AuthClient = new FuelNodeAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
-			, expiration: 3600 // faking
 		});
 
 		expect( AuthClient.isExpired() ).to.be.true;
 	});
 
-	it( 'should return true when token is expired based on time', function( done ) {
+	it( 'should return true when expiration > process.hrtime()[0] and no accessToken (expired)', function() {
 		var AuthClient = new FuelNodeAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
-			, expiration: 1 // faking
 		});
 
-		AuthClient.accessToken = '1234556778866'; // faking that we have an accessToken
+		AuthClient.expiration = '111111111111';
 
-		setTimeout( function() {
-			expect( AuthClient.isExpired() ).to.be.true;
+		expect( AuthClient.isExpired() ).to.be.true;
+	});
+
+	it( 'should return false when expiration > process.hrtime()[0] and there is an accessToken (not expired)', function( done ) {
+		var AuthClient = new FuelNodeAuth({
+			clientId: 'test'
+			, clientSecret: 'test'
+			, authUrl: localhost + '/v1/requestToken'
+		});
+
+		AuthClient.getAccessToken( {}, false, function() {
+			expect( this.isExpired() ).to.be.false;
 			done();
-		}, 1000 );
+		}.bind( AuthClient ) );
 	});
 });

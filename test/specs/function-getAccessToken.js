@@ -1,7 +1,6 @@
-var expect       = require( 'chai' ).expect;
-var mockServer   = require( '../mock-server' );
-var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
-
+var expect          = require( 'chai' ).expect;
+var mockServer      = require( '../mock-server' );
+var FuelNodeAuth    = require( '../../lib/fuel-node-auth' );
 var port            = 4550;
 var localhost       = 'http://127.0.0.1:' + port;
 var sampleResponses = require( '../sample-responses' );

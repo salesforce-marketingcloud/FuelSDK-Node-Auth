@@ -1,7 +1,7 @@
 var expect          = require( 'chai' ).expect;
 var sinon           = require( 'sinon' );
 var mockServer      = require( '../mock-server' );
-var FuelNodeAuth    = require( '../../lib/fuel-node-auth' );
+var FuelAuth        = require( '../../lib/fuel-auth' );
 var port            = 4550;
 var localhost       = 'http://127.0.0.1:' + port;
 var sampleResponses = require( '../sample-responses' );
@@ -12,7 +12,7 @@ var sampleResponses = require( '../sample-responses' );
 describe( 'Function - getAccessToken', function() {
 	'use strict';
 
-	var server, AuthClient;
+	var server;
 
 	before( function() {
 		server = mockServer( port );
@@ -23,7 +23,7 @@ describe( 'Function - getAccessToken', function() {
 	});
 
 	it( 'should deliver successful response with an accessToken and expiration', function( done ) {
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'
@@ -36,7 +36,7 @@ describe( 'Function - getAccessToken', function() {
 	});
 
 	it( 'should deliver successful response with null request options', function( done ) {
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'
@@ -49,9 +49,9 @@ describe( 'Function - getAccessToken', function() {
 	});
 
 	it( 'should deliver cached response with if expiration time/accessToken is valid when requesting', function( done ) {
-		var requestSpy = sinon.spy( FuelNodeAuth.prototype, '_requestToken' );
+		var requestSpy = sinon.spy( FuelAuth.prototype, '_requestToken' );
 
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'
@@ -66,16 +66,16 @@ describe( 'Function - getAccessToken', function() {
 				expect( requestSpy.calledOnce ).to.be.true;
 				expect( body.expiresIn ).to.be.at.most( 3600 );
 
-				FuelNodeAuth.prototype._requestToken.restore(); // restoring function
+				FuelAuth.prototype._requestToken.restore(); // restoring function
 				done();
 			});
 		});
 	});
 
 	it( 'should force request even if the expiration time is valid', function( done ) {
-		var requestSpy = sinon.spy( FuelNodeAuth.prototype, '_requestToken' );
+		var requestSpy = sinon.spy( FuelAuth.prototype, '_requestToken' );
 
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'
@@ -88,14 +88,14 @@ describe( 'Function - getAccessToken', function() {
 			AuthClient.getAccessToken( {}, true, function() {
 
 				expect( requestSpy.calledTwice ).to.be.true;
-				FuelNodeAuth.prototype._requestToken.restore(); // restoring function
+				FuelAuth.prototype._requestToken.restore(); // restoring function
 				done();
 			});
 		});
 	});
 
 	it( 'should deliver a 404 when url is not correct', function( done ) {
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/'
@@ -108,7 +108,7 @@ describe( 'Function - getAccessToken', function() {
 	});
 
 	it( 'should deliver a 401 when clientId and clientSecret are not correct', function( done ) {
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'invalidId'
 			, clientSecret: 'invalidSecret'
 			, authUrl: localhost + '/v1/requestToken'
@@ -121,7 +121,7 @@ describe( 'Function - getAccessToken', function() {
 	});
 
 	it( 'should deliver a 500 when API breaks', function( done ) {
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test500'
 			, clientSecret: 'test500'
 			, authUrl: localhost + '/v1/requestToken'
@@ -136,11 +136,11 @@ describe( 'Function - getAccessToken', function() {
 	it( 'should return error from request (request module)', function( done ) {
 		var errorMsg = 'fake requset error';
 
-		sinon.stub( FuelNodeAuth.prototype, '_requestToken', function( requestOptions, callback ) {
+		sinon.stub( FuelAuth.prototype, '_requestToken', function( requestOptions, callback ) {
 			this._deliverResponse( 'error', errorMsg, callback );
 		});
 
-		AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test500'
 			, clientSecret: 'test500'
 			, authUrl: localhost + '/v1/requestToken'
@@ -148,7 +148,7 @@ describe( 'Function - getAccessToken', function() {
 
 		AuthClient.getAccessToken( {}, false, function( err ) {
 			expect( err ).to.equal( errorMsg );
-			FuelNodeAuth.prototype._requestToken.restore(); // restoring function
+			FuelAuth.prototype._requestToken.restore(); // restoring function
 			done();
 		});
 	});

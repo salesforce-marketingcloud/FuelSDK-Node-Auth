@@ -1,8 +1,8 @@
-var expect          = require( 'chai' ).expect;
-var mockServer      = require( '../mock-server' );
-var FuelNodeAuth    = require( '../../lib/fuel-node-auth' );
-var port            = 4550;
-var localhost       = 'http://127.0.0.1:' + port;
+var expect     = require( 'chai' ).expect;
+var mockServer = require( '../mock-server' );
+var FuelAuth   = require( '../../lib/fuel-auth' );
+var port       = 4550;
+var localhost  = 'http://127.0.0.1:' + port;
 
 describe( 'Function - isExpired', function () {
 	'use strict';
@@ -18,7 +18,7 @@ describe( 'Function - isExpired', function () {
 	});
 
 	it( 'should return true when there is no expiration set and no accessToken (expired)', function() {
-		var AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 		});
@@ -27,7 +27,7 @@ describe( 'Function - isExpired', function () {
 	});
 
 	it( 'should return true when expiration > process.hrtime()[0] and no accessToken (expired)', function() {
-		var AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 		});
@@ -38,7 +38,7 @@ describe( 'Function - isExpired', function () {
 	});
 
 	it( 'should return false when expiration > process.hrtime()[0] and there is an accessToken (not expired)', function( done ) {
-		var AuthClient = new FuelNodeAuth({
+		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'

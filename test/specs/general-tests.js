@@ -1,14 +1,11 @@
-// testing libraries
-var expect = require( 'chai' ).expect;
-
-// module to test
-var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
+var expect   = require( 'chai' ).expect;
+var FuelAuth = require( '../../lib/fuel-auth' );
 
 describe( 'General Tests', function() {
 	'use strict';
 
 	it( 'should be a constructor', function() {
-		expect( FuelNodeAuth ).to.be.a( 'function' );
+		expect( FuelAuth ).to.be.a( 'function' );
 	});
 
 	it( 'should require clientId and clientSecret', function() {
@@ -16,14 +13,14 @@ describe( 'General Tests', function() {
 
 		// testing with nothing passed into constructor
 		try {
-			AuthClient = new FuelNodeAuth();
+			AuthClient = new FuelAuth();
 		} catch( err ) {
 			expect( err.message ).to.equal( 'options are required. see readme.' );
 		}
 
 		// testing with clientId passed into constructor
 		try {
-			AuthClient = new FuelNodeAuth({
+			AuthClient = new FuelAuth({
 				clientId: 'test'
 			});
 		} catch( err ) {
@@ -32,7 +29,7 @@ describe( 'General Tests', function() {
 
 		// testing with clientSecret passed into constructor
 		try {
-			AuthClient = new FuelNodeAuth({
+			AuthClient = new FuelAuth({
 				clientSecret: 'test'
 			});
 		} catch( err ) {
@@ -41,7 +38,7 @@ describe( 'General Tests', function() {
 
 		// testing with clientId and clientSecret passed as objects into constructor
 		try {
-			AuthClient = new FuelNodeAuth({
+			AuthClient = new FuelAuth({
 				clientId: { test: 'test' }
 				, clientSecret: { test: 'test' }
 			});
@@ -49,7 +46,7 @@ describe( 'General Tests', function() {
 			expect( err.message ).to.equal( 'clientId or clientSecret must be strings' );
 		}
 
-		AuthClient = new FuelNodeAuth({
+		AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 		});
@@ -58,14 +55,14 @@ describe( 'General Tests', function() {
 	});
 
 	it( 'should have event emitter on prototype', function() {
-		expect( FuelNodeAuth.super_.name ).to.equal( 'EventEmitter' );
+		expect( FuelAuth.super_.name ).to.equal( 'EventEmitter' );
 	});
 
 	it( 'should have getAccessToken on prototype', function() {
-		expect( FuelNodeAuth.prototype.getAccessToken ).to.be.a( 'function' );
+		expect( FuelAuth.prototype.getAccessToken ).to.be.a( 'function' );
 	});
 
 	it( 'should have isExpired on prototype', function() {
-		expect( FuelNodeAuth.prototype.isExpired ).to.be.a( 'function' );
+		expect( FuelAuth.prototype.isExpired ).to.be.a( 'function' );
 	});
 });

@@ -30,14 +30,14 @@ This is a new library and requires extensive testing.  We are currently working 
 ## Setting up the client
 
 ```js
-var FuelNodeAuth = require( 'fuel-node-auth' );
+var FuelAuth = require( 'fuel-auth' );
 
 // Required Settings
 var myClientId     = 'yourClientId';
 var myClientSecret = 'yourClientSecret';
 
 // Minimal Initialization
-var FuelAuthClient = new FuelNodeAuth({
+var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
 });
@@ -48,7 +48,7 @@ var accessToken  = ""; // Used with SSO - will be created for you if not provide
 var expiration   = ""; // Used with SSO - will be created for you if not provided
 var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
 
-var FuelAuthClient = new FuelNodeAuth({
+var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
 	, authUrl: authUrl

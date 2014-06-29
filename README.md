@@ -65,12 +65,12 @@ var requestOptions = {}; // extra options to be passed in and used on request
 var force          = null; // default
 
 // will get called when we have an error
-FuelAuthClient.on( 'token:error', function( err ) {
+FuelAuthClient.on( 'error', function( err ) {
 	console.log( err );
 });
 
 // will get called when we have a successful token retrieval
-FuelAuthClient.on( 'token:success', function( token ) {
+FuelAuthClient.on( 'response', function( token ) {
 	console.log( token );
 });
 
@@ -83,8 +83,8 @@ FuelAuthClient.getAccessToken( requestOptions, force );
 
 | Event | Fired When... | Data Returned |
 | ----- | ------------- | ---- |
-| token:success | a token was successfully retrieved. This could mean the token was fetched from the API, or it was just returned because it hadn't expired or returned | `"token-from-api-returned"` |
-| token:error | there was an error in the request to the API | error from request |
+| response | a request was successfully made to the API and a token returned (200), a cached token was returned, or an error from the API (400, 401, 500) was returned | payload from API (200, 400, 401, 500) or cached token |
+| error | there was an error in the request to the API (if request module errors)| error from request |
 
 ### Using Callbacks
 

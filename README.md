@@ -30,14 +30,14 @@ This is a new library and requires extensive testing.  We are currently working 
 ## Setting up the client
 
 ```js
-var FuelNodeAuth = require( 'fuel-node-auth' );
+var FuelAuth = require( 'fuel-auth' );
 
 // Required Settings
 var myClientId     = 'yourClientId';
 var myClientSecret = 'yourClientSecret';
 
 // Minimal Initialization
-var FuelAuthClient = new FuelNodeAuth({
+var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
 });
@@ -48,7 +48,7 @@ var accessToken  = ""; // Used with SSO - will be created for you if not provide
 var expiration   = ""; // Used with SSO - will be created for you if not provided
 var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
 
-var FuelAuthClient = new FuelNodeAuth({
+var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
 	, authUrl: authUrl
@@ -65,12 +65,12 @@ var requestOptions = {}; // extra options to be passed in and used on request
 var force          = null; // default
 
 // will get called when we have an error in the request to the API
-FuelAuthClient.on( 'token:error', function( err ) {
+FuelAuthClient.on( 'error', function( err ) {
 	console.log( err );
 });
 
 // will get called when we have a "successful" response from API (200, 401, 404, 500)
-FuelAuthClient.on( 'token:success', function( body ) {
+FuelAuthClient.on( 'response', function( body ) {
 	console.log( body );
 });
 
@@ -83,8 +83,8 @@ FuelAuthClient.getAccessToken( requestOptions, force );
 
 | Event | Fired When... | Data Returned |
 | ----- | ------------- | ---- |
-| token:success | a token was successfully retrieved. This could mean the token was fetched from the API, or it was just returned because it hadn't expired or returned | `"token-from-api-returned"` |
-| token:error | there was an error in the request to the API | error from request |
+| response | a request was successfully made to the API and a token returned (200), a cached token was returned, or an error from the API (400, 401, 500) was returned | payload from API (200, 400, 401, 500) or cached token |
+| error | there was an error in the request to the API (if request module errors)| error from request |
 
 ### Using Callbacks
 

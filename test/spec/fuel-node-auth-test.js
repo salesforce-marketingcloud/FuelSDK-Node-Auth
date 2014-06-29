@@ -1,6 +1,6 @@
-var should       = require( 'should' );
-var app          = require( '../app' );
-var FuelNodeAuth = require( '../../lib/fuel-node-auth' );
+var should   = require( 'should' );
+var app      = require( '../app' );
+var FuelAuth = require( '../../lib/fuel-auth' );
 
 /*
 ======== ShouldJS Reference ========
@@ -11,14 +11,14 @@ Docs ref for Shouldjs - https://github.com/shouldjs/should.js
 */
 
 var server;
-var client = new FuelNodeAuth({
+var client = new FuelAuth({
 	"authUrl" : "http://localhost:3000/auth",
 	"clientId" : '12345',
 	"clientSecret" : '12345'
 });
 
 
-describe('FuelNodeAuth', function () {
+describe('FuelAuth', function () {
 	// before(function(){
 	// 	server = app.listen(3000);
 	// });

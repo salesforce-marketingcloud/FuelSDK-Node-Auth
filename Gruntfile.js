@@ -10,7 +10,7 @@ module.exports = function( grunt ) {
 			, all: [
 				'Gruntfile.js'
 				, 'lib/**/*.js'
-				, 'test/app/js'
+				, 'test/**/*.js'
 			]
 		}
 	});

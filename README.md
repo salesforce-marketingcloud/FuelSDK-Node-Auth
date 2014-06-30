@@ -64,14 +64,14 @@ var FuelAuthClient = new FuelAuth({
 var requestOptions = {}; // extra options to be passed in and used on request
 var force          = null; // default
 
-// will get called when we have an error
+// will get called when we have an error in the request to the API
 FuelAuthClient.on( 'error', function( err ) {
 	console.log( err );
 });
 
-// will get called when we have a successful token retrieval
-FuelAuthClient.on( 'response', function( token ) {
-	console.log( token );
+// will get called when we have a "successful" response from API (200, 401, 404, 500)
+FuelAuthClient.on( 'response', function( body ) {
+	console.log( body );
 });
 
 // telling the client to get a token from the API
@@ -92,8 +92,8 @@ FuelAuthClient.getAccessToken( requestOptions, force );
 var requestOptions = {}; // extra options to be passed in and used on request
 var force          = null; // default
 
-FuelAuthClient.getAccessToken( requestOptions, force, function( err, token ) {
-	console.log( err, token );
+FuelAuthClient.getAccessToken( requestOptions, force, function( err, body ) {
+	console.log( err, body );
 });
 ```
 ## Contributors

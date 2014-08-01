@@ -11,7 +11,15 @@ This is a new library and requires extensive testing. Feel free to test it out a
 
 ## API
 
-1. **getAccessToken( requestOptions, forceRequest, callback )**
+1. Initialization - **new FuelAuth( options )**
+    * options
+        * required: yes
+        * type: `Object`
+            * clientId - required
+            * clientSecred - required
+            * authUrl - not required
+                * default: https://auth.exacttargetapis.com/v1/requestToken
+2. **getAccessToken( requestOptions, forceRequest, callback )**
 	* requestOptions
 		* required: no
 		* Type: `Object`
@@ -24,7 +32,7 @@ This is a new library and requires extensive testing. Feel free to test it out a
 		* required: no
 		* Type: `Function`  
 		* Function that will be executed after token request completes
-2. **checkExpired()**
+3. **checkExpired()**
 	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
 
 ## Setting up the client

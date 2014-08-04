@@ -11,8 +11,8 @@ This is a new library and requires extensive testing. Feel free to test it out a
 
 ## API
 
-1. Initialization - **new FuelAuth( options )**
-    * options
+1. **new FuelAuth( options )** - Initialization
+    * *options*
         * required: yes
         * type: `Object`
             * clientId - required
@@ -20,18 +20,23 @@ This is a new library and requires extensive testing. Feel free to test it out a
             * authUrl - not required
                 * default: https://auth.exacttargetapis.com/v1/requestToken
 2. **getAccessToken( requestOptions, forceRequest, callback )**
-	* requestOptions
+	* *requestOptions*
 		* required: no
 		* Type: `Object`
 		* Extra options that will be deep merged into options used when token is requested
-	* forceRequest
+	* *forceRequest*
 		* required: no
 		* Type: `Boolean`
 		* If true, token will always be requested from API regardless of expiration
-	* callback
+	* *callback( error, data )*
 		* required: no
 		* Type: `Function`  
 		* Function that will be executed after token request completes
+		* *parameters*
+			* error - error encountered. `null` if no error
+			* data - object with data and response
+				* accessToken ( data.accessToken ) - access token
+				* expiresIn ( data.expiresIn ) - time until token expiration
 3. **checkExpired()**
 	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
 
@@ -51,18 +56,16 @@ var FuelAuthClient = new FuelAuth({
 });
 
 // Initialization with extra options
-var refreshToken = ""; // Used with SSO - will be created for you if not provided
-var accessToken  = ""; // Used with SSO - will be created for you if not provided
-var expiration   = ""; // Used with SSO - will be created for you if not provided
 var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
+var accessToken  = ""; // Used with SSO - will be created for you if not provided
+var refreshToken = ""; // Used with SSO - will be created for you if not provided
 
 var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
 	, clientSecret: myClientSecret // required
 	, authUrl: authUrl
-	, refreshToken: refreshToken
 	, accessToken: accessToken
-	, expiration: expiration
+	, refreshToken: refreshToken
 });
 ```
 ## Examples
@@ -78,8 +81,10 @@ FuelAuthClient.on( 'error', function( err ) {
 });
 
 // will get called when we have a "successful" response from API (200, 401, 404, 500)
-FuelAuthClient.on( 'response', function( body ) {
-	console.log( body );
+FuelAuthClient.on( 'response', function( data ) {
+	// data.accessToken = your token
+	// data.expiresIn = how long until token expiration
+	console.log( data );
 });
 
 // telling the client to get a token from the API
@@ -100,8 +105,15 @@ FuelAuthClient.getAccessToken( requestOptions, force );
 var requestOptions = {}; // extra options to be passed in and used on request
 var force          = null; // default
 
-FuelAuthClient.getAccessToken( requestOptions, force, function( err, body ) {
-	console.log( err, body );
+FuelAuthClient.getAccessToken( requestOptions, force, function( err, data ) {
+	if( !!err ) {
+		console.log( err );
+		return;
+	}
+
+	// data.accessToken = your token
+	// data.expiresIn = how long until token expiration
+	console.log( data );
 });
 ```
 ## Contributors

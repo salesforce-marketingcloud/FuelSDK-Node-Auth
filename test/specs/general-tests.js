@@ -80,10 +80,6 @@ describe( 'General Tests', function() {
 		expect( AuthClient ).to.be.a( 'object' );
 	});
 
-	it( 'should have event emitter on prototype', function() {
-		expect( FuelAuth.super_.name ).to.equal( 'EventEmitter' );
-	});
-
 	it( 'should have getAccessToken on prototype', function() {
 		expect( FuelAuth.prototype.getAccessToken ).to.be.a( 'function' );
 	});

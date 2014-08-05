@@ -169,7 +169,8 @@ describe( 'Function - getAccessToken', function() {
 		var errorMsg = 'fake requset error';
 
 		sinon.stub( FuelAuth.prototype, '_requestToken', function( requestOptions, callback ) {
-			this._deliverResponse( 'error', errorMsg, callback );
+			callback( errorMsg, null );
+			return;
 		});
 
 		var AuthClient = new FuelAuth({

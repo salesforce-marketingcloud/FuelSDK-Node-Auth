@@ -15,7 +15,7 @@ This is a new library and requires extensive testing. Feel free to test it out a
 **new FuelAuth( options )**
 * *options*
 	* required: yes
-	* type: `Object`
+	* Type: `Object`
 		* clientId - required
 		* clientSecret - required
 		* authUrl - not required
@@ -34,7 +34,7 @@ This is a new library and requires extensive testing. Feel free to test it out a
 		* default: `false`
 		* If true, token will always be requested from API regardless of expiration
 	* `callback( error, data )`
-		* required: no
+		* required: yes
 		* Type: `Function`  
 		* Function that will be executed after token request completes
 		* *parameters*
@@ -62,8 +62,8 @@ var FuelAuthClient = new FuelAuth({
 
 // Initialization with extra options
 var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
-var accessToken  = ""; // Used with SSO - will be created for you if not provided
-var refreshToken = ""; // Used with SSO - will be created for you if not provided
+var accessToken  = "";
+var refreshToken = "";
 
 var FuelAuthClient = new FuelAuth({
 	clientId: myClientId // required
@@ -74,8 +74,6 @@ var FuelAuthClient = new FuelAuth({
 });
 ```
 ## Examples
-
-### Using Callbacks
 
 ```js
 var options = {
@@ -109,45 +107,6 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 	console.log( data );
 });
 ```
-
-### Using Events
-```js
-var options = {
-	// whatever request options you want
-	// See https://github.com/mikeal/request#requestoptions-callback
-
-	// I want to force a request
-	force: true
-};
-
-// will get called when we have an error in the request to the API
-FuelAuthClient.on( 'error', function( err ) {
-	console.log( err );
-});
-
-// will get called when we have a "successful" response from API (200, 401, 404, 500)
-FuelAuthClient.on( 'response', function( data ) {
-	// data.accessToken = your token
-	// data.expiresIn = how long until token expiration
-	console.log( data );
-});
-
-// telling the client to get a token from the API
-// or return it if it's there and not expired
-FuelAuthClient.getAccessToken( options );
-
-// OR don't pass any options
-FuelAuthClient.getAccessToken();
-```
-
-#### Events Emitted
-
-| Event | Fired When... | Data Returned |
-| ----- | ------------- | ---- |
-| response | a request was successfully made to the API and a token returned (200), a cached token was returned, or an error from the API (400, 401, 500) was returned | payload from API (200, 400, 401, 500) or cached token |
-| error | there was an error in the request to the API (if request module errors)| error from request |
-
-
 ## Contributors
 
 *In alphabetical order*

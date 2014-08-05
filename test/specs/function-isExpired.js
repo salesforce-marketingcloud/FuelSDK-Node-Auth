@@ -70,7 +70,7 @@ describe( 'Function - isExpired', function () {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( {}, false, function() {
+		AuthClient.getAccessToken( { force: false }, function() {
 			expect( this.isExpired() ).to.be.false;
 			done();
 		}.bind( AuthClient ) );

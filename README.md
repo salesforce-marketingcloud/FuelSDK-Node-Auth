@@ -5,30 +5,35 @@ This library allows users to create authentication clients for ExactTarget APIs.
 
 ## Accessing ExactTarget's API
 
+<!--
 Making requests to our API should be done using our [REST][1] and [SOAP][2] clients.
+-->
 
 This is a new library and requires extensive testing. Feel free to test it out and submit issues as they are found.
 
+## Initialization
+**new FuelAuth( options )**
+* *options*
+	* required: yes
+	* type: `Object`
+		* clientId - required
+		* clientSecret - required
+		* authUrl - not required
+			* default: https://auth.exacttargetapis.com/v1/requestToken
+
 ## API
 
-1. **new FuelAuth( options )** - Initialization
-    * *options*
-        * required: yes
-        * type: `Object`
-            * clientId - required
-            * clientSecred - required
-            * authUrl - not required
-                * default: https://auth.exacttargetapis.com/v1/requestToken
-2. **getAccessToken( requestOptions, forceRequest, callback )**
-	* *requestOptions*
+1. **getAccessToken( options, callback )**
+	* `options`
 		* required: no
 		* Type: `Object`
-		* Extra options that will be deep merged into options used when token is requested
-	* *forceRequest*
+		* Extra options used on token request. See [request modules options][3]
+	* `options.force`
 		* required: no
 		* Type: `Boolean`
+		* default: `false`
 		* If true, token will always be requested from API regardless of expiration
-	* *callback( error, data )*
+	* `callback( error, data )`
 		* required: no
 		* Type: `Function`  
 		* Function that will be executed after token request completes
@@ -37,7 +42,7 @@ This is a new library and requires extensive testing. Feel free to test it out a
 			* data - object with data and response
 				* accessToken ( data.accessToken ) - access token
 				* expiresIn ( data.expiresIn ) - time until token expiration
-3. **checkExpired()**
+2. **checkExpired()**
 	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
 
 ## Setting up the client
@@ -70,10 +75,50 @@ var FuelAuthClient = new FuelAuth({
 ```
 ## Examples
 
+### Using Callbacks
+
+```js
+var options = {
+	// whatever request options you want
+	// See https://github.com/mikeal/request#requestoptions-callback
+
+	// I want to force a request
+	force: true
+};
+
+FuelAuthClient.getAccessToken( options, function( err, data ) {
+	if( !!err ) {
+		console.log( err );
+		return;
+	}
+
+	// data.accessToken = your token
+	// data.expiresIn = how long until token expiration
+	console.log( data );
+});
+
+// OR don't pass any options
+FuelAuthClient.getAccessToken( function( err, data ) {
+	if( !!err ) {
+		console.log( err );
+		return;
+	}
+
+	// data.accessToken = your token
+	// data.expiresIn = how long until token expiration
+	console.log( data );
+});
+```
+
 ### Using Events
 ```js
-var requestOptions = {}; // extra options to be passed in and used on request
-var force          = null; // default
+var options = {
+	// whatever request options you want
+	// See https://github.com/mikeal/request#requestoptions-callback
+
+	// I want to force a request
+	force: true
+};
 
 // will get called when we have an error in the request to the API
 FuelAuthClient.on( 'error', function( err ) {
@@ -89,7 +134,10 @@ FuelAuthClient.on( 'response', function( data ) {
 
 // telling the client to get a token from the API
 // or return it if it's there and not expired
-FuelAuthClient.getAccessToken( requestOptions, force );
+FuelAuthClient.getAccessToken( options );
+
+// OR don't pass any options
+FuelAuthClient.getAccessToken();
 ```
 
 #### Events Emitted
@@ -99,23 +147,7 @@ FuelAuthClient.getAccessToken( requestOptions, force );
 | response | a request was successfully made to the API and a token returned (200), a cached token was returned, or an error from the API (400, 401, 500) was returned | payload from API (200, 400, 401, 500) or cached token |
 | error | there was an error in the request to the API (if request module errors)| error from request |
 
-### Using Callbacks
 
-```js
-var requestOptions = {}; // extra options to be passed in and used on request
-var force          = null; // default
-
-FuelAuthClient.getAccessToken( requestOptions, force, function( err, data ) {
-	if( !!err ) {
-		console.log( err );
-		return;
-	}
-
-	// data.accessToken = your token
-	// data.expiresIn = how long until token expiration
-	console.log( data );
-});
-```
 ## Contributors
 
 *In alphabetical order*
@@ -151,3 +183,4 @@ FuelAuthClient.getAccessToken( requestOptions, force, function( err, data ) {
 
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP
+[3]: https://github.com/mikeal/request#requestoptions-callback

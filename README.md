@@ -157,6 +157,8 @@ FuelAuthClient.getAccessToken();
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
+* **0.3.0** - 8/5/14
+    * getAccessToken API change - *breaking*
 * **0.2.1** - 8/5/14
     * completed unit tests
     * npm package update

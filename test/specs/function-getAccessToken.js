@@ -55,20 +55,20 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( {}, false, function( err, body ) {
+		AuthClient.getAccessToken( { force: false }, function( err, body ) {
 			expect( body ).to.deep.equal( sampleResponses[ '200' ] );
 			done();
 		});
 	});
 
-	it( 'should deliver successful response with null request options', function( done ) {
+	it( 'should deliver successful response with no options passed', function( done ) {
 		var AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( null, false, function( err, body ) {
+		AuthClient.getAccessToken( function( err, body ) {
 			expect( body ).to.deep.equal( sampleResponses[ '200' ] );
 			done();
 		});
@@ -84,10 +84,10 @@ describe( 'Function - getAccessToken', function() {
 		});
 
 		// getting a valid expiration time and valid token
-		AuthClient.getAccessToken( {}, false, function() {
+		AuthClient.getAccessToken( { force: false }, function() {
 
 			// getting cached token
-			AuthClient.getAccessToken( {}, false, function( err, body ) {
+			AuthClient.getAccessToken( { force: false }, function( err, body ) {
 
 				expect( requestSpy.calledOnce ).to.be.true;
 				expect( body.expiresIn ).to.be.at.most( 3600 );
@@ -107,11 +107,17 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
+		var options = {
+			force: false
+		};
+
 		// getting a valid expiration time and valid token
-		AuthClient.getAccessToken( {}, false, function() {
+		AuthClient.getAccessToken( options, function() {
+
+			options.force = true;
 
 			// forcing new token request
-			AuthClient.getAccessToken( {}, true, function() {
+			AuthClient.getAccessToken( options, function() {
 
 				expect( requestSpy.calledTwice ).to.be.true;
 				FuelAuth.prototype._requestToken.restore(); // restoring function
@@ -127,7 +133,7 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/'
 		});
 
-		AuthClient.getAccessToken( {}, false, function( err, body ) {
+		AuthClient.getAccessToken( { force: false }, function( err, body ) {
 			expect( body ).to.deep.equal( sampleResponses[ '404' ] );
 			done();
 		});
@@ -140,7 +146,7 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( {}, false, function( err, body ) {
+		AuthClient.getAccessToken( { force: false }, function( err, body ) {
 			expect( body ).to.deep.equal( sampleResponses[ '401' ] );
 			done();
 		});
@@ -153,7 +159,7 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( {}, false, function( err, body ) {
+		AuthClient.getAccessToken( { force: false }, function( err, body ) {
 			expect( body ).to.deep.equal( sampleResponses[ '500' ] );
 			done();
 		});
@@ -172,7 +178,7 @@ describe( 'Function - getAccessToken', function() {
 			, authUrl: localhost + '/v1/requestToken'
 		});
 
-		AuthClient.getAccessToken( {}, false, function( err ) {
+		AuthClient.getAccessToken( { force: false }, function( err ) {
 			expect( err ).to.equal( errorMsg );
 			FuelAuth.prototype._requestToken.restore(); // restoring function
 			done();

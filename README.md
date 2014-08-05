@@ -125,6 +125,12 @@ FuelAuthClient.getAccessToken( requestOptions, force, function( err, data ) {
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
+* **0.2.1** - 8/5/14
+    * completed unit tests
+    * npm package update
+    * changing require name to `fuel-auth`
+    * added license
+    * readme update
 * **0.2.0** - 6/25/14
     * refactored object constructor
     * removed context from getAccessToken API

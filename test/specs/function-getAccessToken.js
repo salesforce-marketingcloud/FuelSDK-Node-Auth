@@ -48,6 +48,30 @@ describe( 'Function - getAccessToken', function() {
 		server.close();
 	});
 
+	it( 'should require a callback argument', function() {
+		var AuthClient = new FuelAuth({
+			clientId: 'test'
+			, clientSecret: 'test'
+			, authUrl: localhost + '/v1/requestToken'
+		});
+
+		// should require a callbabck without options passed
+		try {
+			AuthClient.getAccessToken();
+		} catch( err ) {
+			expect( err.name ).to.equal( 'TypeError' );
+			expect( err.message ).to.equal( 'callback argument is required' );
+		}
+
+		// should require a callback with options passed
+		try {
+			AuthClient.getAccessToken( { force: false } );
+		} catch( err ) {
+			expect( err.name ).to.equal( 'TypeError' );
+			expect( err.message ).to.equal( 'callback argument is required' );
+		}
+	});
+
 	it( 'should deliver successful response with an accessToken and expiration', function( done ) {
 		var AuthClient = new FuelAuth({
 			clientId: 'test'

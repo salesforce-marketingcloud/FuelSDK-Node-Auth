@@ -116,26 +116,28 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
-* **0.3.0** - 8/5/14
+* **0.4.0** - 2014-08-06
+    * removed event emitter - *breaking*
+* **0.3.0** - 2014-08-05
     * getAccessToken API change - *breaking*
-* **0.2.1** - 8/5/14
+* **0.2.1** - 2014-08-05
     * completed unit tests
     * npm package update
     * changing require name to `fuel-auth`
     * added license
     * readme update
-* **0.2.0** - 6/25/14
+* **0.2.0** - 2014-06-25
     * refactored object constructor
     * removed context from getAccessToken API
     * docs/readme updates
-* **0.1.1** - 6/23/14
+* **0.1.1** - 2014-06-23
     * readme updates
-* **0.1.0** - 6/23/14
+* **0.1.0** - 2014-06-23
     * adding callbacks to getAccessToken API
 	* adding ability to pass extra request options to getAccessToken API
 	* adding ability to force token request from ExactTarget API
 	* adding check for expired token
-* **0.0.1** - 6/22/14
+* **0.0.1** - 2014-06-22
     * added event emitter for delivery of data
 	* setup travis
 	* refactoring of unit tests

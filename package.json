@@ -1,6 +1,6 @@
 {
   "name": "fuel-auth",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Node Library for Authenticating with ExactTarget Fuel. Used for authenticating REST and SOAP APIs.",
   "main": "./lib/fuel-auth.js",
   "scripts": {

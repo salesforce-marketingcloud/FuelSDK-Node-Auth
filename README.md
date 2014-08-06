@@ -116,6 +116,8 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
+* **0.5.0** - 2014-08-06
+    * updated request dependency version due to qs module security vulnerability
 * **0.4.0** - 2014-08-06
     * removed event emitter - *breaking*
 * **0.3.0** - 2014-08-05

@@ -1,7 +1,9 @@
 Fuel Auth (for Node.js)
 =============
 
-This library allows users to create authentication clients for ExactTarget APIs. Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level.
+This library allows users to create authentication clients for ExactTarget APIs. 
+
+<!-- Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level. -->
 
 ## Accessing ExactTarget's API
 

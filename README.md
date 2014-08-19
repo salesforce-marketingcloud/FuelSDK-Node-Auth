@@ -1,7 +1,7 @@
 Fuel Auth (for Node.js) [![Build Status](https://travis-ci.org/ExactTarget/Fuel-Node-Auth.svg)](https://travis-ci.org/ExactTarget/Fuel-Node-Auth)
 =============
 
-This library allows users to create authentication clients for ExactTarget APIs. 
+This library allows users to create authentication clients for ExactTarget APIs.
 
 <!-- Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level. -->
 
@@ -120,6 +120,8 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
+* **0.5.1** - 2014-08-19
+    * fixed Travis CI testing for 0.8 and 0.10
 * **0.5.0** - 2014-08-06
     * updated request dependency version due to qs module security vulnerability
 * **0.4.0** - 2014-08-06

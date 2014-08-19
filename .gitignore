@@ -5,3 +5,4 @@ node_modules/
 testing.js
 coverage/
 *.tgz
+npm-debug.log

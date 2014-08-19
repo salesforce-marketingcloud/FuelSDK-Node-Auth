@@ -3,6 +3,6 @@ node_js:
   - "0.8"
   - "0.10"
 before_install:
-  - "test ${TRAVIS_NODE_VERSION} = '0.8' && npm install -g || true"
+  - "test ${TRAVIS_NODE_VERSION} = '0.8' && npm update npm -g || true"
 before_script:
   - npm install -g grunt-cli

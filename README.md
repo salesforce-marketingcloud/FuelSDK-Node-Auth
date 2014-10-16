@@ -118,18 +118,17 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 *In alphabetical order*
 
 * Kelly Andrews - [twitter](https://twitter.com/kellyjandrews), [github](https://github.com/kellyjandrews)
+* David Brainer-Banker - [twitter](https://twitter.com/TweetTypography), [github](https://github.com/tweettypography)
 * Alex Vernacchia - [twitter](https://twitter.com/vernacchia), [github](https://github.com/vernak2539)
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
 ## ChangeLog
-* **0.5.1** - 2014-08-19
-    * fixed Travis CI testing for 0.8 and 0.10
-* **0.5.0** - 2014-08-06
-    * updated request dependency version due to qs module security vulnerability
-* **0.4.0** - 2014-08-06
-    * removed event emitter - *breaking*
-* **0.3.0** - 2014-08-05
-    * getAccessToken API change - *breaking*
+
+* **0.5.2** - 2014-10-16 - added easier way to use scope option when requesting token
+* **0.5.1** - 2014-08-19 - fixed Travis CI testing for 0.8 and 0.10
+* **0.5.0** - 2014-08-06 - updated request dependency version due to qs module security vulnerability
+* **0.4.0** - 2014-08-06 - removed event emitter - *breaking*
+* **0.3.0** - 2014-08-05 - getAccessToken API change - *breaking*
 * **0.2.1** - 2014-08-05
     * completed unit tests
     * npm package update
@@ -140,8 +139,7 @@ FuelAuthClient.getAccessToken( function( err, data ) {
     * refactored object constructor
     * removed context from getAccessToken API
     * docs/readme updates
-* **0.1.1** - 2014-06-23
-    * readme updates
+* **0.1.1** - 2014-06-23 - readme updates
 * **0.1.0** - 2014-06-23
     * adding callbacks to getAccessToken API
 	* adding ability to pass extra request options to getAccessToken API

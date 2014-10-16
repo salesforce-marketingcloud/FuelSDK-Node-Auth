@@ -1,6 +1,6 @@
 {
   "name": "fuel-auth",
-  "version": "0.5.1",
+  "version": "0.5.2",
   "description": "Node Library for Authenticating with ExactTarget Fuel. Used for authenticating REST and SOAP APIs.",
   "main": "./lib/fuel-auth.js",
   "scripts": {
@@ -14,7 +14,8 @@
   "contributors": [
       "Alex Vernacchia <avernacchia@exacttarget.com> (http://babble.byvernacchia.com)",
       "Kelly Andrews <kandrews@exacttarget.com>",
-      "Douglas Wilson <dougcwilson@exacttarget.com>"
+      "Douglas Wilson <dougcwilson@exacttarget.com>",
+      "David Brainer-Banker <dbrainer-banker@exacttarget.com>"
   ],
   "devDependencies": {
     "grunt": "~0.4.5",

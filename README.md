@@ -24,6 +24,8 @@ This is a new library and requires extensive testing. Feel free to test it out a
 		* clientSecret - required
 		* authUrl - not required
 			* default: https://auth.exacttargetapis.com/v1/requestToken
+		* scope - not required
+			* can be used to set a client context when a refreshToken is not available
 
 ## API
 

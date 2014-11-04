@@ -122,6 +122,10 @@ FuelAuthClient.getAccessToken( function( err, data ) {
 * Alex Vernacchia - [twitter](https://twitter.com/vernacchia), [github](https://github.com/vernak2539)
 * Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
 
+## Contributing
+
+We welcome all contributions and issues! There's only one way to make this better, and that's by using it. If you would like to contribute, please checkout our [guidelines](https://github.com/ExactTarget/Fuel-Node-Auth/wiki/Contributing)!
+
 ## ChangeLog
 
 * **0.5.2** - 2014-10-16 - added easier way to use scope option when requesting token

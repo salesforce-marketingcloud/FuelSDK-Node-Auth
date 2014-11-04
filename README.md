@@ -3,7 +3,7 @@ Fuel Auth (for Node.js) [![Build Status](https://travis-ci.org/ExactTarget/Fuel-
 
 This library allows users to create authentication clients for ExactTarget APIs.
 
-<!-- Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level. -->
+Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level.
 
 This library is compatible with node versions 0.8 and 0.10+. `npm install` will error if you're using node version 0.8 with developer dependencies. To have a successful install for testing/contributing use `npm install -g npm@1.2.8000` and the issue should be resolved.
 

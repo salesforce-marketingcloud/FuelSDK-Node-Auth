@@ -9,11 +9,11 @@ This library is compatible with node versions 0.8 and 0.10+. `npm install` will 
 
 ## Accessing ExactTarget's API
 
-<!--
-Making requests to our API should be done using our [REST][1] and [SOAP][2] clients.
--->
-
 This is a new library and requires extensive testing. Feel free to test it out and submit issues as they are found.
+
+```
+npm install fuel-auth --save
+```
 
 ## Initialization
 **new FuelAuth( options )**

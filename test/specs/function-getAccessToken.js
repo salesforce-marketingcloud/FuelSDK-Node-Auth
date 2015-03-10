@@ -194,7 +194,7 @@ describe( 'Function - getAccessToken', function() {
 	it( 'should return error from request (request module)', function( done ) {
 		var errorMsg = 'fake requset error';
 
-		sinon.stub( FuelAuth.prototype, '_requestToken', function( requestOptions ) {
+		sinon.stub( FuelAuth.prototype, '_requestToken', function() {
 			return new Promiser(function(resolve, reject) {
 				reject(errorMsg);
 			});

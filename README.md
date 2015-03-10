@@ -15,104 +15,10 @@ This is a new library and requires extensive testing. Feel free to test it out a
 npm install fuel-auth --save
 ```
 
-## Initialization
-**new FuelAuth( options )**
-* *options*
-	* required: yes
-	* Type: `Object`
-		* clientId - required
-		* clientSecret - required
-		* authUrl - not required
-			* default: https://auth.exacttargetapis.com/v1/requestToken
-		* scope - not required
-			* can be used to set a client context when a refreshToken is not available
+## Docs
 
-## API
+The docs are located on [our wiki][4]. Please take a look, and let us know if anything is missing. 
 
-1. **getAccessToken( options, callback )**
-	* `options`
-		* required: no
-		* Type: `Object`
-		* Extra options used on token request. See [request modules options][3]
-	* `options.force`
-		* required: no
-		* Type: `Boolean`
-		* default: `false`
-		* If true, token will always be requested from API regardless of expiration
-	* `callback( error, data )`
-		* required: yes
-		* Type: `Function`  
-		* Function that will be executed after token request completes
-		* *parameters*
-			* error - error encountered. `null` if no error
-			* data - object with data and response
-				* accessToken ( data.accessToken ) - access token
-				* expiresIn ( data.expiresIn ) - time until token expiration
-2. **checkExpired()**
-	* Returns boolean value. `true` if token is not expired and it exists. `false` if token is expired or it doesn't exist.
-
-## Setting up the client
-
-```js
-var FuelAuth = require( 'fuel-auth' );
-
-// Required Settings
-var myClientId     = 'yourClientId';
-var myClientSecret = 'yourClientSecret';
-
-// Minimal Initialization
-var FuelAuthClient = new FuelAuth({
-	clientId: myClientId // required
-	, clientSecret: myClientSecret // required
-});
-
-// Initialization with extra options
-var authUrl      = "https://auth.exacttargetapis.com/v1/requestToken"; //this is the default
-var accessToken  = "";
-var refreshToken = "";
-
-var FuelAuthClient = new FuelAuth({
-	clientId: myClientId // required
-	, clientSecret: myClientSecret // required
-	, authUrl: authUrl
-	, accessToken: accessToken
-	, refreshToken: refreshToken
-});
-```
-## Examples
-
-```js
-var options = {
-	// whatever request options you want
-	// See https://github.com/mikeal/request#requestoptions-callback
-
-	// I want to force a request
-	force: true
-};
-
-FuelAuthClient.getAccessToken( options, function( err, data ) {
-	if( !!err ) {
-		console.log( err );
-		return;
-	}
-
-	// data.accessToken = your token
-	// data.expiresIn = how long until token expiration
-	console.log( data );
-});
-
-// OR don't pass any options
-FuelAuthClient.getAccessToken( function( err, data ) {
-	if( !!err ) {
-		console.log( err );
-		return;
-	}
-
-	// data.accessToken = your token
-	// data.expiresIn = how long until token expiration
-	console.log( data );
-});
-```
 ## Contributors
 
 *In alphabetical order*
@@ -159,3 +65,4 @@ We welcome all contributions and issues! There's only one way to make this bette
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP
 [3]: https://github.com/mikeal/request#requestoptions-callback
+[4]: https://github.com/ExactTarget/Fuel-Node-Auth/wiki

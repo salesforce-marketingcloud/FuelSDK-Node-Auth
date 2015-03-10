@@ -25,12 +25,14 @@
  */
 
 var expect          = require( 'chai' ).expect;
-var sinon           = require( 'sinon' );
-var mockServer      = require( '../mock-server' );
 var FuelAuth        = require( '../../lib/fuel-auth' );
+var mockServer      = require( '../mock-server' );
 var port            = 4550;
-var localhost       = 'http://127.0.0.1:' + port;
+var Promiser        = (typeof Promise === 'undefined') ? require('promise') : Promise;
 var sampleResponses = require( '../sample-responses' );
+var sinon           = require( 'sinon' );
+
+var localhost = 'http://127.0.0.1:' + port;
 
 // we will not be testing for a missing clientId or clientSecret
 // since the client cannot be created without those values
@@ -192,9 +194,10 @@ describe( 'Function - getAccessToken', function() {
 	it( 'should return error from request (request module)', function( done ) {
 		var errorMsg = 'fake requset error';
 
-		sinon.stub( FuelAuth.prototype, '_requestToken', function( requestOptions, callback ) {
-			callback( errorMsg, null );
-			return;
+		sinon.stub( FuelAuth.prototype, '_requestToken', function( requestOptions ) {
+			return new Promiser(function(resolve, reject) {
+				reject(errorMsg);
+			});
 		});
 
 		var AuthClient = new FuelAuth({

@@ -17,7 +17,7 @@ npm install fuel-auth --save
 
 ## Docs
 
-The docs are located on [our wiki][4]. Please take a look, and let us know if anything is missing. 
+The docs are located on [our wiki][4]. Please take a look, and let us know if anything is missing.
 
 ## Contributors
 
@@ -32,35 +32,6 @@ The docs are located on [our wiki][4]. Please take a look, and let us know if an
 
 We welcome all contributions and issues! There's only one way to make this better, and that's by using it. If you would like to contribute, please checkout our [guidelines](https://github.com/ExactTarget/Fuel-Node-Auth/wiki/Contributing)!
 
-## ChangeLog
-
-* **0.5.2** - 2014-10-16 - added easier way to use scope option when requesting token
-* **0.5.1** - 2014-08-19 - fixed Travis CI testing for 0.8 and 0.10
-* **0.5.0** - 2014-08-06 - updated request dependency version due to qs module security vulnerability
-* **0.4.0** - 2014-08-06 - removed event emitter - *breaking*
-* **0.3.0** - 2014-08-05 - getAccessToken API change - *breaking*
-* **0.2.1** - 2014-08-05
-    * completed unit tests
-    * npm package update
-    * changing require name to `fuel-auth`
-    * added license
-    * readme update
-* **0.2.0** - 2014-06-25
-    * refactored object constructor
-    * removed context from getAccessToken API
-    * docs/readme updates
-* **0.1.1** - 2014-06-23 - readme updates
-* **0.1.0** - 2014-06-23
-    * adding callbacks to getAccessToken API
-	* adding ability to pass extra request options to getAccessToken API
-	* adding ability to force token request from ExactTarget API
-	* adding check for expired token
-* **0.0.1** - 2014-06-22
-    * added event emitter for delivery of data
-	* setup travis
-	* refactoring of unit tests
-	* semantic changes
-	* initial commits
 
 [1]: https://github.com/ExactTarget/Fuel-Node-REST
 [2]: https://github.com/ExactTarget/Fuel-Node-SOAP

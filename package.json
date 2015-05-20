@@ -27,8 +27,8 @@
     "sinon": "~1.13.0"
   },
   "dependencies": {
+    "bluebird": "~2.9.25",
     "lodash": "~3.5.0",
-    "promise": "~6.1.0",
     "request": "~2.53.0"
   }
 }

@@ -28,7 +28,7 @@ var expect          = require( 'chai' ).expect;
 var FuelAuth        = require( '../../lib/fuel-auth' );
 var mockServer      = require( '../mock-server' );
 var port            = 4550;
-var Promiser        = (typeof Promise === 'undefined') ? require('promise') : Promise;
+var Promiser        = (typeof Promise === 'undefined') ? require('bluebird') : Promise;
 var sampleResponses = require( '../sample-responses' );
 var sinon           = require( 'sinon' );
 

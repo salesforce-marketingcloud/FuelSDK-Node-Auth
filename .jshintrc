@@ -17,11 +17,8 @@
   "undef": true,
   "unused": true,
   "globals": {
-    "after": true,
-    "before": true,
-    "define": true,
+    "beforeEach": true,
     "describe": true,
-    "expect": true,
     "it": true,
     "Promise": true,
     "require": true

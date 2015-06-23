@@ -1,5 +1,5 @@
 /**
- * Copyright (c) 2014​, salesforce.com, inc.
+ * Copyright (c) 2015, salesforce.com, inc.
  * All rights reserved.
  *
  * Redistribution and use in source and binary forms, with or without modification, are permitted provided
@@ -24,67 +24,33 @@
  * POSSIBILITY OF SUCH DAMAGE.
  */
 
-var expect   = require( 'chai' ).expect;
-var FuelAuth = require( '../../lib/fuel-auth' );
+'use strict';
 
-describe( 'General Tests', function() {
-	'use strict';
+var assert   = require('assert');
+var FuelAuth = require('../../lib/fuel-auth');
 
-	it( 'should be a constructor', function() {
-		expect( FuelAuth ).to.be.a( 'function' );
-	});
+describe('isExpired', function () {
+	var AuthClient;
 
-	it( 'should require clientId and clientSecret', function() {
-		var AuthClient;
-
-		// testing with nothing passed into constructor
-		try {
-			AuthClient = new FuelAuth();
-		} catch( err ) {
-			expect( err.message ).to.equal( 'options are required. see readme.' );
-		}
-
-		// testing with clientId passed into constructor
-		try {
-			AuthClient = new FuelAuth({
-				clientId: 'test'
-			});
-		} catch( err ) {
-			expect( err.message ).to.equal( 'clientId or clientSecret is missing or invalid' );
-		}
-
-		// testing with clientSecret passed into constructor
-		try {
-			AuthClient = new FuelAuth({
-				clientSecret: 'test'
-			});
-		} catch( err ) {
-			expect( err.message ).to.equal( 'clientId or clientSecret is missing or invalid' );
-		}
-
-		// testing with clientId and clientSecret passed as objects into constructor
-		try {
-			AuthClient = new FuelAuth({
-				clientId: { test: 'test' }
-				, clientSecret: { test: 'test' }
-			});
-		} catch( err ) {
-			expect( err.message ).to.equal( 'clientId or clientSecret must be strings' );
-		}
-
+	beforeEach(function() {
 		AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
 		});
-
-		expect( AuthClient ).to.be.a( 'object' );
 	});
 
-	it( 'should have getAccessToken on prototype', function() {
-		expect( FuelAuth.prototype.getAccessToken ).to.be.a( 'function' );
+	it('should return true when there is no expiration set and no accessToken (expired)', function() {
+		assert(AuthClient.isExpired());
 	});
 
-	it( 'should have isExpired on prototype', function() {
-		expect( FuelAuth.prototype.isExpired ).to.be.a( 'function' );
+	it('should return true when expiration > process.hrtime()[0] and no accessToken (expired)', function() {
+		AuthClient.expiration = 111111111111;
+		assert(AuthClient.isExpired());
+	});
+
+	it('should return false when expiration > process.hrtime()[0] and there is an accessToken (not expired)', function() {
+		AuthClient.accessToken = '<accessToken>';
+		AuthClient.expiration  = 111111111111;
+		assert(!AuthClient.isExpired());
 	});
 });

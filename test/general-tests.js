@@ -26,7 +26,7 @@
 'use strict';
 
 var assert   = require('assert');
-var FuelAuth = require('../../lib/fuel-auth');
+var FuelAuth = require('../lib/fuel-auth');
 
 describe('General Tests', function() {
 	it('should be a constructor', function() {

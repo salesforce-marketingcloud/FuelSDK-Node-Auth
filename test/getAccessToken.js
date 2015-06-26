@@ -27,7 +27,7 @@
 'use strict';
 
 var assert   = require('assert');
-var FuelAuth = require('../../lib/fuel-auth');
+var FuelAuth = require('../lib/fuel-auth');
 var sinon    = require('sinon');
 
 describe('getAccessToken', function() {

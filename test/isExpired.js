@@ -27,7 +27,7 @@
 'use strict';
 
 var assert   = require('assert');
-var FuelAuth = require('../../lib/fuel-auth');
+var FuelAuth = require('../lib/fuel-auth');
 
 describe('isExpired', function () {
 	var AuthClient;

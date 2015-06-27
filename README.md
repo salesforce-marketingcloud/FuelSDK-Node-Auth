@@ -9,12 +9,15 @@ Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-lev
 
 This library is compatible with:
 - Node.js
-  - 0.8
   - 0.10
   - 0.12
 - io.js
- 
-`npm install` will error if you're using node version 0.8 with developer dependencies. To have a successful install for testing/contributing use `npm install -g npm@1.2.8000` and the issue should be resolved.
+
+**Node 0.8.x**
+
+As of v2, this library will no longer support node v0.8.x. At the moment (v2 release), this library works with node versions 0.8.x  but the tests will fail due to a dev dependency being incompatible with this node version.
+
+*Please note,* full support for v0.8.x will likely be dropped in the near future.
 
 ## Docs
 

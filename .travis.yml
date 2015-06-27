@@ -6,7 +6,7 @@ node_js:
   - "iojs"
 matrix:
   allow_failures:
-      - nodejs: 0.8
+      - nodejs: "0.8"
 before_install: "test $TRAVIS_NODE_VERSION = '0.8' && npm install -g npm@1.2.8000 || true"
 before_script:
   - npm install -g grunt-cli

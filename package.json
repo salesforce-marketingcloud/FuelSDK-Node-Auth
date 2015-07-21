@@ -1,7 +1,7 @@
 {
   "name": "fuel-auth",
   "version": "2.0.0",
-  "description": "Node Library for Authenticating with ExactTarget Fuel. Used for authenticating REST and SOAP APIs.",
+  "description": "Node library for authenticating REST and SOAP APIs in the Salesforce Marketing Cloud (formerly ExactTarget).",
   "main": "./lib/fuel-auth.js",
   "scripts": {
     "test": "grunt jshint && node ./node_modules/mocha/bin/mocha --reporter=spec test/*.js"

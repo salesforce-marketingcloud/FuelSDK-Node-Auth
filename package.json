@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:ExactTarget/Fuel-Node-Auth.git"
+    "url": "git@github.com:salesforcefuel/FuelSDK-Node-Auth.git"
   },
   "license": "BSD-3-Clause",
   "contributors": [

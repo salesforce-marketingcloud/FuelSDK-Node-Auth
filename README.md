@@ -1,4 +1,4 @@
-Fuel Auth (for Node.js) [![Build Status](https://travis-ci.org/salesforcefuel/FuelSDK-Node-Auth.svg?branch=master)](https://travis-ci.org/salesforcefuel/FuelSDK-Node-Auth)
+Fuel Auth (for Node.js) [![Build Status](https://travis-ci.org/salesforce-marketingcloud/FuelSDK-Node-Auth.svg?branch=master)](https://travis-ci.org/salesforce-marketingcloud/FuelSDK-Node-Auth)
 =============
 
 ***This repo used to be located at https://github.com/exacttarget/Fuel-Node-Auth***

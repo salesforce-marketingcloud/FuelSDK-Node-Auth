@@ -9,11 +9,7 @@ This library allows users to create authentication clients for Salesforce Market
 
 Use our [REST][1] and [SOAP][2] clients to interact with these APIs at a low-level.
 
-This library is compatible with:
-- Node.js
-  - 0.10
-  - 0.12
-- io.js
+This library is compatible with almost all versions of Node. You can check our [Travis build](https://travis-ci.org/salesforce-marketingcloud/FuelSDK-Node-Auth) for more details.
 
 **Node 0.8.x**
 

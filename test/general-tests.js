@@ -66,7 +66,7 @@ describe('General Tests', function() {
 		} catch(err) {
 			assert.equal(err.message, 'clientId or clientSecret must be strings');
 		}
-
+ 
 		AuthClient = new FuelAuth({
 			clientId: 'test'
 			, clientSecret: 'test'
@@ -81,5 +81,9 @@ describe('General Tests', function() {
 
 	it('should have isExpired on prototype', function() {
 		assert.equal(typeof FuelAuth.prototype.isExpired, 'function');
+	});
+
+	it('should have invalidateToken on prototype', function() {
+		assert.equal(typeof FuelAuth.prototype.invalidateToken, 'function');
 	});
 });

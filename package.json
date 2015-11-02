@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git@github.com:salesforcefuel/FuelSDK-Node-Auth.git"
+    "url": "git@github.com:salesforce-marketingcloud/FuelSDK-Node-Auth.git"
   },
   "license": "BSD-3-Clause",
   "contributors": [
@@ -26,8 +26,8 @@
     "sinon": "~1.13.0"
   },
   "dependencies": {
-    "bluebird": "~2.9.25",
-    "lodash": "~3.5.0",
-    "request": "~2.53.0"
+    "bluebird": "~3.0.5",
+    "lodash.merge": "~3.3.2",
+    "request": "~2.65.0"
   }
 }

@@ -14,7 +14,8 @@
   "contributors": [
     "Alex Vernacchia <avernacchia@exacttarget.com> (http://babble.byvernacchia.com)",
     "Kelly Andrews <kandrews@exacttarget.com>",
-    "Douglas Wilson <dougcwilson@exacttarget.com>",
+    "Douglas Wilson <doug.wilson@salesforce.com>",
+    "Nathan Boyd <nboyd@salesforce.com>",
     "David Brainer-Banker <dbrainer-banker@exacttarget.com>"
   ],
   "devDependencies": {

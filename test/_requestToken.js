@@ -81,6 +81,19 @@ describe('_requestToken', function() {
 			});
 	});
 
+	it('should fail if request successful without body', function () {
+		nock('http://127.0.0.1:3000')
+			.post('/v1/requestToken')
+			.reply(200);
+
+		return AuthClient
+			._requestToken()
+			.then(
+				function onResolve() { assert(false, 'Unexpected resolve'); },
+				function onReject(err) { assert.equal(err.message, 'No response body'); }
+			);
+	});
+
 	it('should add refreshToken to json if set on client', function(done) {
 		var refreshToken = '<refreshToken>';
 		var calledWithRefreshToken = false;

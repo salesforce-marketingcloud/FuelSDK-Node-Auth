@@ -1,6 +1,6 @@
 {
   "name": "fuel-auth",
-  "version": "2.1.2",
+  "version": "2.1.3",
   "description": "Node library for authenticating REST and SOAP APIs in the Salesforce Marketing Cloud (formerly ExactTarget).",
   "main": "./lib/fuel-auth.js",
   "scripts": {

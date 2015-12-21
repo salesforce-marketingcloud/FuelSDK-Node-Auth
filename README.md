@@ -21,15 +21,6 @@ As of v2, this library will no longer support node v0.8.x. At the moment (v2 rel
 
 The docs are located on [our wiki][4]. Please take a look, and let us know if anything is missing.
 
-## Contributors
-
-*In alphabetical order*
-
-* Kelly Andrews - [twitter](https://twitter.com/kellyjandrews), [github](https://github.com/kellyjandrews)
-* David Brainer-Banker - [twitter](https://twitter.com/TweetTypography), [github](https://github.com/tweettypography)
-* Alex Vernacchia - [twitter](https://twitter.com/vernacchia), [github](https://github.com/vernak2539)
-* Doug Wilson - [twitter](https://twitter.com/blipsofadoug), [github](https://github.com/dougwilson)
-
 ## Contributing
 
 We welcome all contributions and issues! There's only one way to make this better, and that's by using it. If you would like to contribute, please checkout our [guidelines][5]!

@@ -10,9 +10,27 @@
 var assert   = require('assert');
 var FuelAuth = require('../lib/fuel-auth');
 
+// this only done for linting reasons. No difference between FuelAuth
+var nonConstructorFuelAuth = require('../lib/fuel-auth');
+
 describe('General Tests', function() {
 	it('should be a constructor', function() {
 		assert.equal(typeof FuelAuth, 'function');
+	});
+
+	it('should not need to use "new" when instantiating', function() {
+		// Arrange
+		var options = {
+			clientId: '<test>',
+			clientSecret: '<test>',
+			authUrl: '<test auth url>'
+		};
+
+		// Act
+		var client = nonConstructorFuelAuth(options);
+
+		// Assert
+		assert.equal(client.authUrl, options.authUrl);
 	});
 
 	it('should require clientId and clientSecret', function() {

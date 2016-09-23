@@ -29,6 +29,6 @@
   "dependencies": {
     "bluebird": "~3.3.5",
     "lodash.merge": "~4.3.5",
-    "request": "~2.72.0"
+    "request": "~2.75.0"
   }
 }

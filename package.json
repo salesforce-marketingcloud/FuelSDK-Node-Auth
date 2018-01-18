@@ -27,6 +27,7 @@
     "babel-preset-es2015": "^6.24.1",
     "gulp": "^3.9.1",
     "gulp-jshint": "^2.1.0",
+    "gulp-mocha": "^5.0.0",
     "gulp-workflow": "^1.1.5",
     "jshint": "^2.9.5",
     "mocha": "~2.2.1",
@@ -35,7 +36,6 @@
     "testen": "^2.2.1"
   },
   "dependencies": {
-    "gulp-mocha": "^5.0.0",
     "request": "~2.83.0"
   }
 }

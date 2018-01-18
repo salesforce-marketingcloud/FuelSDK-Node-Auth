@@ -7,60 +7,60 @@
 
 'use strict';
 
-var assert   = require('assert');
-var FuelAuth = require('../lib/fuel-auth');
-var sinon    = require('sinon');
+const assert = require('assert');
+const FuelAuth = require('../lib/fuel-auth');
+const sinon = require('sinon');
 
-describe('getAccessToken', function() {
-	var AuthClient;
-	var sampleCb;
+describe('getAccessToken', () => {
+	let AuthClient;
+	let sampleCb;
 
-	beforeEach(function() {
+	beforeEach(() => {
 		AuthClient = new FuelAuth({
-			clientId: 'test'
-			, clientSecret: 'test'
-			, authUrl: 'http://127.0.0.1:3000/v1/requestToken'
+			clientId: 'test',
+			clientSecret: 'test',
+			authUrl: 'http://127.0.0.1:3000/v1/requestToken'
 		});
 
-		sampleCb = function() { return true; };
+		sampleCb = () => true;
 	});
 
-	it('should throw error if callback provided is not a function', function() {
-		var didThrow = false;
-		var error;
+	it('should throw error if callback provided is not a function', () => {
+		let didThrow = false;
+		let error;
 
 		try {
 			AuthClient.getAccessToken({}, 'test');
-		} catch(err) {
+		} catch (err) {
 			didThrow = true;
-			error    = err.message;
+			error = err.message;
 		}
 
 		assert.equal(didThrow, true);
 		assert.equal(error, 'argument callback must be a function');
 	});
 
-	it('should call _processRequest with provided callback and options', function() {
-		var options           = { test: true };
-		var processRequestSpy = sinon.spy(AuthClient, '_processRequest');
-		var expiredSpy        = sinon.stub(AuthClient, 'isExpired').returns(true);
+	it('should call _processRequest with provided callback and options', () => {
+		const options = { test: true };
+		const processRequestSpy = sinon.spy(AuthClient, '_processRequest');
+		const expiredSpy = sinon.stub(AuthClient, 'isExpired').returns(true);
 
 		AuthClient.getAccessToken(options, sampleCb);
 		assert.equal(processRequestSpy.calledWith(true, options, sampleCb), true);
 		assert.equal(expiredSpy.calledOnce, true);
 	});
 
-	it('should call _processRequest when only callback is provided', function() {
-		var expiredSpy        = sinon.stub(AuthClient, 'isExpired').returns(true);
-		var processRequestSpy = sinon.spy(AuthClient, '_processRequest');
+	it('should call _processRequest when only callback is provided', () => {
+		const expiredSpy = sinon.stub(AuthClient, 'isExpired').returns(true);
+		const processRequestSpy = sinon.spy(AuthClient, '_processRequest');
 
 		AuthClient.getAccessToken(sampleCb);
 		assert.equal(processRequestSpy.calledWith(true, {}, sampleCb), true);
 		assert.equal(expiredSpy.calledOnce, true);
 	});
 
-	it('should not force new request if not expired and no option', function() {
-		var processRequestSpy = sinon.spy(AuthClient, '_processRequest');
+	it('should not force new request if not expired and no option', () => {
+		const processRequestSpy = sinon.spy(AuthClient, '_processRequest');
 
 		sinon.stub(AuthClient, 'isExpired').returns(false);
 
@@ -68,8 +68,8 @@ describe('getAccessToken', function() {
 		assert.equal(processRequestSpy.calledWith(false, {}, sampleCb), true);
 	});
 
-	it('should use force option', function() {
-		var processRequestSpy = sinon.spy(AuthClient, '_processRequest');
+	it('should use force option', () => {
+		const processRequestSpy = sinon.spy(AuthClient, '_processRequest');
 
 		sinon.stub(AuthClient, 'isExpired').returns(false);
 
@@ -77,66 +77,54 @@ describe('getAccessToken', function() {
 		assert.equal(processRequestSpy.calledWith(true, {}, sampleCb), true);
 	});
 
-	it('should use promises to deliver data', function(done) {
+	it('should use promises to deliver data', done => {
 		sinon.stub(AuthClient, 'isExpired').returns(true);
-		sinon.stub(AuthClient, '_processRequest', function(getNewToken, options, callback) {
-			callback(null, {});
-		});
+		sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => callback(null, {}));
 
-		AuthClient
-			.getAccessToken()
-			.then(function(data) {
+		AuthClient.getAccessToken()
+			.then(data => {
 				assert.equal(!!data, true);
 				done();
 			})
-			.catch(function(err) {
-				done(err);
-			});
+			.catch(err => done(err));
 	});
 
-	it('should use promises to deliver data /w options', function(done) {
-		var processRequestSpy = sinon.stub(AuthClient, '_processRequest', function(getNewToken, options, callback) {
+	it('should use promises to deliver data /w options', done => {
+		const processRequestSpy = sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => {
 			callback(null, {});
 		});
 
 		sinon.stub(AuthClient, 'isExpired').returns(true);
 
-		AuthClient
-			.getAccessToken({ force: true })
-			.then(function(data) {
+		AuthClient.getAccessToken({ force: true })
+			.then(data => {
 				assert(!!data);
 				assert.equal(processRequestSpy.calledWith(true, {}), true);
 				done();
 			})
-			.catch(function(err) {
-				done(err);
+			.catch(err => done(err));
+	});
+
+	it('should use promises to deliver error', done => {
+		sinon.stub(AuthClient, 'isExpired').returns(true);
+		sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => {
+			callback({}, null);
+		});
+
+		AuthClient.getAccessToken()
+			.then(data => done(data))
+			.catch(err => {
+				assert.equal(!!err, true);
+				done();
 			});
 	});
 
-	it('should use promises to deliver error', function(done) {
-			sinon.stub(AuthClient, 'isExpired').returns(true);
-			sinon.stub(AuthClient, '_processRequest', function(getNewToken, options, callback) {
-				callback({}, null);
-			});
-
-			AuthClient
-				.getAccessToken()
-				.then(function(data) {
-					done(data);
-				})
-				.catch(function(err) {
-					assert.equal(!!err, true);
-					done();
-				});
-	});
-
-
-	it('should throw error if trying to use callbacks and promise at same time', function() {
-		var threw = false;
+	it('should throw error if trying to use callbacks and promise at same time', () => {
+		let threw = false;
 
 		try {
-			AuthClient.getAccessToken(function() {}).then(function() {});
-		} catch(err) {
+			AuthClient.getAccessToken(() => {}).then(() => {});
+		} catch (err) {
 			threw = !!err;
 		}
 		assert(threw);

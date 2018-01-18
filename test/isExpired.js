@@ -7,31 +7,31 @@
 
 'use strict';
 
-var assert   = require('assert');
-var FuelAuth = require('../lib/fuel-auth');
+const assert = require('assert');
+const FuelAuth = require('../lib/fuel-auth');
 
-describe('isExpired', function () {
-	var AuthClient;
+describe('isExpired', () => {
+	let AuthClient;
 
 	beforeEach(function() {
 		AuthClient = new FuelAuth({
-			clientId: 'test'
-			, clientSecret: 'test'
+			clientId: 'test',
+			clientSecret: 'test'
 		});
 	});
 
-	it('should return true when there is no expiration set and no accessToken (expired)', function() {
+	it('should return true when there is no expiration set and no accessToken (expired)', () => {
 		assert(AuthClient.isExpired());
 	});
 
-	it('should return true when expiration > process.hrtime()[0] and no accessToken (expired)', function() {
+	it('should return true when expiration > process.hrtime()[0] and no accessToken (expired)', () => {
 		AuthClient.expiration = 111111111111;
 		assert(AuthClient.isExpired());
 	});
 
-	it('should return false when expiration > process.hrtime()[0] and there is an accessToken (not expired)', function() {
+	it('should return false when expiration > process.hrtime()[0] and there is an accessToken (not expired)', () => {
 		AuthClient.accessToken = '<accessToken>';
-		AuthClient.expiration  = 111111111111;
+		AuthClient.expiration = 111111111111;
 		assert(!AuthClient.isExpired());
 	});
 });

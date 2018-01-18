@@ -7,83 +7,65 @@
 
 'use strict';
 
-var assert   = require('assert');
-var FuelAuth = require('../lib/fuel-auth');
+const assert = require('assert');
+const FuelAuth = require('../lib/fuel-auth');
 
-// this only done for linting reasons. No difference between FuelAuth
-var nonConstructorFuelAuth = require('../lib/fuel-auth');
-
-describe('General Tests', function() {
-	it('should be a constructor', function() {
+describe('General Tests', () => {
+	it('should be a constructor', () => {
 		assert.equal(typeof FuelAuth, 'function');
 	});
 
-	it('should not need to use "new" when instantiating', function() {
-		// Arrange
-		var options = {
-			clientId: '<test>',
-			clientSecret: '<test>',
-			authUrl: '<test auth url>'
-		};
-
-		// Act
-		var client = nonConstructorFuelAuth(options);
-
-		// Assert
-		assert.equal(client.authUrl, options.authUrl);
-	});
-
-	it('should require clientId and clientSecret', function() {
-		var AuthClient;
+	it('should require clientId and clientSecret', () => {
+		let AuthClient;
 
 		// testing with nothing passed into constructor
 		try {
 			AuthClient = new FuelAuth();
-		} catch(err) {
+		} catch (err) {
 			assert.equal(err.message, 'options are required. see readme.');
 		}
 
 		// testing with clientId passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientId: 'test' });
-		} catch(err) {
+		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}
 
 		// testing with clientSecret passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientSecret: 'test' });
-		} catch(err) {
+		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}
 
 		// testing with clientId and clientSecret passed as objects into constructor
 		try {
 			AuthClient = new FuelAuth({
-				clientId: { test: 'test' }
-				, clientSecret: { test: 'test' }
+				clientId: { test: 'test' },
+				clientSecret: { test: 'test' }
 			});
-		} catch(err) {
+		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret must be strings');
 		}
 
 		AuthClient = new FuelAuth({
-			clientId: 'test'
-			, clientSecret: 'test'
+			clientId: 'test',
+			clientSecret: 'test'
 		});
 
 		assert.equal(typeof AuthClient, 'object');
 	});
 
-	it('should have getAccessToken on prototype', function() {
+	it('should have getAccessToken on prototype', () => {
 		assert.equal(typeof FuelAuth.prototype.getAccessToken, 'function');
 	});
 
-	it('should have isExpired on prototype', function() {
+	it('should have isExpired on prototype', () => {
 		assert.equal(typeof FuelAuth.prototype.isExpired, 'function');
 	});
 
-	it('should have invalidateToken on prototype', function() {
+	it('should have invalidateToken on prototype', () => {
 		assert.equal(typeof FuelAuth.prototype.invalidateToken, 'function');
 	});
 });

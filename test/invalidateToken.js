@@ -7,75 +7,61 @@
 
 'use strict';
 
-var assert   = require('assert');
-var FuelAuth = require('../lib/fuel-auth');
-var nock     = require('nock');
-var Promise  = (typeof Promise === 'undefined') ? require('bluebird') : Promise;
+const assert = require('assert');
+const FuelAuth = require('../lib/fuel-auth');
+const nock = require('nock');
 
-beforeEach(function() {
-	this.AuthClient = new FuelAuth({
-		clientId: 'test'
-		, clientSecret: 'test'
-		, authUrl: 'http://127.0.0.1:3000/v1/requestToken'
+let AuthClient;
+let sampleData;
+
+beforeEach(() => {
+	AuthClient = new FuelAuth({
+		clientId: 'test',
+		clientSecret: 'test',
+		authUrl: 'http://127.0.0.1:3000/v1/requestToken'
 	});
 
-	this.sampleData = {
+	sampleData = {
 		accessToken: '<accessToken>',
 		expiresIn: 1
 	};
 });
 
-describe('invalidateToken', function () {
-
-	beforeEach(function () {
+describe('invalidateToken', () => {
+	beforeEach(() => {
 		nock('http://127.0.0.1:3000')
 			.post('/v1/requestToken')
-			.reply(200, this.sampleData);
+			.reply(200, sampleData);
 	});
 
-	it('should set clients token  to undefined after invalidateToken is called on the existing access token', function () {
-		var AuthClient = this.AuthClient;
-		var sampleData = this.sampleData;
+	it('should set clients token  to undefined after invalidateToken is called on the existing access token', () => {
+		return AuthClient._requestToken().then(data => {
+			assert.strictEqual(data.accessToken, sampleData.accessToken);
+			assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
 
-		return this.AuthClient
-			._requestToken()
-			.then(function (data) {
-				assert.strictEqual(data.accessToken, sampleData.accessToken);
-				assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
-
-				AuthClient.invalidateToken(data.accessToken);
-				assert.strictEqual(AuthClient.accessToken, undefined);
-			});
+			AuthClient.invalidateToken(data.accessToken);
+			assert.strictEqual(AuthClient.accessToken, undefined);
+		});
 	});
 
-	it('should not set clients token to undefined after invalidateToken is called with invalid arguments', function () {
-		var AuthClient = this.AuthClient;
-		var sampleData = this.sampleData;
+	it('should not set clients token to undefined after invalidateToken is called with invalid arguments', () => {
+		return AuthClient._requestToken().then(data => {
+			assert.strictEqual(data.accessToken, sampleData.accessToken);
+			assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
 
-		return AuthClient
-			._requestToken()
-			.then(function (data) {
-				assert.strictEqual(data.accessToken, sampleData.accessToken);
-				assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
-
-				AuthClient.invalidateToken('foo');
-				assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
-			});
+			AuthClient.invalidateToken('foo');
+			assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
+		});
 	});
 
-	it('should throw type error when called with non-string arguments', function () {
-		var AuthClient = this.AuthClient;
-		var sampleData = this.sampleData;
+	it('should throw type error when called with non-string arguments', () => {
+		return AuthClient._requestToken().then(data => {
+			assert.strictEqual(data.accessToken, sampleData.accessToken);
+			assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
+			assert.throws(AuthClient.invalidateToken, TypeError);
 
-		return this.AuthClient
-			._requestToken()
-			.then(function (data) {
-				assert.strictEqual(data.accessToken, sampleData.accessToken);
-				assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
-				assert.throws(AuthClient.invalidateToken, TypeError);
-
-				// ensure token did not change
-				assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
-			});
+			// ensure token did not change
+			assert.strictEqual(AuthClient.accessToken, sampleData.accessToken);
+		});
 	});
 });

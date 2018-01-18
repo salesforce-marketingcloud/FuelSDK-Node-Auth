@@ -13,7 +13,7 @@ const FuelAuth = require('../lib/fuel-auth');
 describe('isExpired', () => {
 	let AuthClient;
 
-	beforeEach(function() {
+	beforeEach(() => {
 		AuthClient = new FuelAuth({
 			clientId: 'test',
 			clientSecret: 'test'

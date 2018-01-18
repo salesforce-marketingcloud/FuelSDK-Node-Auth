@@ -16,6 +16,7 @@
   "strict": true,
   "undef": true,
   "unused": true,
+  "esversion": 6,
   "globals": {
     "beforeEach": true,
     "describe": true,

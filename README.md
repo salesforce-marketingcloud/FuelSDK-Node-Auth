@@ -3,7 +3,7 @@ Fuel Auth (for Node.js) [![Build Status](https://travis-ci.org/salesforce-market
 
 ***This repo used to be located at https://github.com/exacttarget/Fuel-Node-Auth***
 
-[![NPM](https://nodei.co/npm/fuel-auth.png?downloads=true)](https://nodei.co/npm/fuel-auth/)
+[![NPM](https://nodei.co/npm/fuel-auth.png?downloads=true)](https://nodei.co/npm/fuel-auth/) [![Greenkeeper badge](https://badges.greenkeeper.io/salesforce-marketingcloud/FuelSDK-Node-Auth.svg)](https://greenkeeper.io/)
 
 This library allows users to create authentication clients for Salesforce Marketing Cloud (formerly ExactTarget) APIs.
 

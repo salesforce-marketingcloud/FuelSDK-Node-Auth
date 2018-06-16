@@ -4,8 +4,8 @@
   "description": "Node library for authenticating REST and SOAP APIs in the Salesforce Marketing Cloud (formerly ExactTarget).",
   "main": "./lib/fuel-auth.js",
   "scripts": {
-    "test": "node ./node_modules/.bin/gulp ci",
-    "test:versions": "node ./node_modules/.bin/testen"
+    "lint": "jshint **/*.js",
+    "test": "yarn run lint && mocha ./test/*.js --reporter=spec"
   },
   "engines": {
     "node": ">= 4"
@@ -25,10 +25,6 @@
   "devDependencies": {
     "babel-core": "^6.26.0",
     "babel-preset-es2015": "^6.24.1",
-    "gulp": "^3.9.1",
-    "gulp-jshint": "^2.1.0",
-    "gulp-mocha": "^6.0.0",
-    "gulp-workflow": "^1.1.5",
     "jshint": "^2.9.5",
     "mocha": "~5.2.0",
     "nock": "~9.3.2",

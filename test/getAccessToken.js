@@ -79,7 +79,7 @@ describe('getAccessToken', () => {
 
 	it('should use promises to deliver data', done => {
 		sinon.stub(AuthClient, 'isExpired').returns(true);
-		sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => callback(null, {}));
+		sinon.stub(AuthClient, '_processRequest').callsFake((getNewToken, options, callback) => callback(null, {}));
 
 		AuthClient.getAccessToken()
 			.then(data => {
@@ -90,7 +90,7 @@ describe('getAccessToken', () => {
 	});
 
 	it('should use promises to deliver data /w options', done => {
-		const processRequestSpy = sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => {
+		const processRequestSpy = sinon.stub(AuthClient, '_processRequest').callsFake((getNewToken, options, callback) => {
 			callback(null, {});
 		});
 
@@ -107,7 +107,7 @@ describe('getAccessToken', () => {
 
 	it('should use promises to deliver error', done => {
 		sinon.stub(AuthClient, 'isExpired').returns(true);
-		sinon.stub(AuthClient, '_processRequest', (getNewToken, options, callback) => {
+		sinon.stub(AuthClient, '_processRequest').callsFake((getNewToken, options, callback) => {
 			callback({}, null);
 		});
 

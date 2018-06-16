@@ -28,7 +28,7 @@ beforeEach(() => {
 describe('_processRequest', () => {
 	it('should get a new token', done => {
 		const getNewToken = true;
-		const requestSpy = sinon.stub(AuthClient, '_requestToken', () => {
+		const requestSpy = sinon.stub(AuthClient, '_requestToken').callsFake(() => {
 			return new Promise(resolve => resolve(sampleData));
 		});
 
@@ -43,7 +43,7 @@ describe('_processRequest', () => {
 
 	it('should handle error when trying to get new token', done => {
 		const getNewToken = true;
-		const requestSpy = sinon.stub(AuthClient, '_requestToken', () => {
+		const requestSpy = sinon.stub(AuthClient, '_requestToken').callsFake(() => {
 			return new Promise((resolve, reject) => {
 				reject(sampleData);
 			});

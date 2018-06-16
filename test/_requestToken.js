@@ -73,10 +73,9 @@ describe('_requestToken', () => {
 		AuthClient.refreshToken = refreshToken;
 
 		nock('http://127.0.0.1:3000')
+			.filteringRequestBody(/.*/, '*')
 			.post('/v1/requestToken')
 			.reply(200, (uri, body) => {
-				body = JSON.parse(body);
-
 				if (body.refreshToken === refreshToken) {
 					calledWithRefreshToken = true;
 				}
@@ -101,8 +100,6 @@ describe('_requestToken', () => {
 		nock('http://127.0.0.1:3000')
 			.post('/v1/requestToken')
 			.reply(200, (uri, body) => {
-				body = JSON.parse(body);
-
 				if (body.scope === scope) {
 					calledWithScope = true;
 				}

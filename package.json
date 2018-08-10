@@ -32,6 +32,6 @@
     "testen": "^2.2.1"
   },
   "dependencies": {
-    "request": "~2.87.0"
+    "request": "~2.88.0"
   }
 }

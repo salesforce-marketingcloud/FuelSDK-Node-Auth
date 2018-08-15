@@ -1221,9 +1221,9 @@ nise@^1.3.3:
     path-to-regexp "^1.7.0"
     text-encoding "^0.6.4"
 
-nock@~9.4.0:
-  version "9.4.2"
-  resolved "https://registry.npmjs.org/nock/-/nock-9.4.2.tgz#bab58a44b5781bdb74d7808673a2dbeefafb898d"
+nock@~9.6.1:
+  version "9.6.1"
+  resolved "https://registry.yarnpkg.com/nock/-/nock-9.6.1.tgz#d96e099be9bc1d0189a77f4490bbbb265c381b49"
   dependencies:
     chai "^4.1.2"
     debug "^3.1.0"

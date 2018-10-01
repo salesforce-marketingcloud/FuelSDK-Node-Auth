@@ -18,6 +18,8 @@
   "unused": true,
   "esversion": 6,
   "globals": {
+    "before": true,
+    "after": true,
     "beforeEach": true,
     "describe": true,
     "it": true,

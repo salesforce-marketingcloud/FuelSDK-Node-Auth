@@ -15,6 +15,38 @@ describe('General Tests', () => {
 		assert.equal(typeof FuelAuth, 'function');
 	});
 
+	it('clientSecret not needed for OAuth2 public app', () => {
+		let AuthClient;
+		
+		var options = {
+			clientId:'client_id',
+			authOptions:{
+				authVersion:'2'
+			}
+		};
+		AuthClient = new FuelAuth(options);
+		assert(true);
+	});
+
+
+	it('AuthorizationCode and RedirectURI are mandatory for public/web app', () => {
+		let AuthClient;
+		
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authOptions:{
+				authVersion:'2',
+				applicationType: 'public'
+			}
+		};
+		try {
+			AuthClient = new FuelAuth(options);
+		} catch (err) {
+			assert.equal(err.message, 'RedirectURI and Authorization Code are required for Public/Web App OAuth2 Authentication');
+		}
+	});
+
 	it('should require clientId and clientSecret', () => {
 		let AuthClient;
 

@@ -20,8 +20,12 @@ describe('General Tests', () => {
 		
 		var options = {
 			clientId:'client_id',
+			authUrl:'test',
 			authOptions:{
-				authVersion:'2'
+				authVersion: 2,
+				applicationType: 'public',
+				redirectURI: 'test',
+				authorizationCode: 'test'
 			}
 		};
 		AuthClient = new FuelAuth(options);
@@ -35,8 +39,9 @@ describe('General Tests', () => {
 		var options = {
 			clientId:'client_id',
 			clientSecret:'client_secret',
+			authUrl:'test',
 			authOptions:{
-				authVersion:'2',
+				authVersion: 2,
 				applicationType: 'public'
 			}
 		};

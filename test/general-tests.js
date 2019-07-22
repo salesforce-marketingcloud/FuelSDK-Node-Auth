@@ -42,6 +42,7 @@ describe('General Tests', () => {
 		};
 		try {
 			AuthClient = new FuelAuth(options);
+			assert.fail("Should Throw Exception with Error Message RedirectURI and Authorization Code are required for Public/Web App OAuth2 Authentication");
 		} catch (err) {
 			assert.equal(err.message, 'RedirectURI and Authorization Code are required for Public/Web App OAuth2 Authentication');
 		}
@@ -53,6 +54,7 @@ describe('General Tests', () => {
 		// testing with nothing passed into constructor
 		try {
 			AuthClient = new FuelAuth();
+			assert.fail("Should Throw Exception with Error Message options are required. see readme.");
 		} catch (err) {
 			assert.equal(err.message, 'options are required. see readme.');
 		}
@@ -60,6 +62,7 @@ describe('General Tests', () => {
 		// testing with clientId passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientId: 'test' });
+			assert.fail("Should Throw Exception with Error Message clientId or clientSecret is missing or invalid");
 		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}
@@ -67,6 +70,7 @@ describe('General Tests', () => {
 		// testing with clientSecret passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientSecret: 'test' });
+			assert.fail("Should Throw Exception with Error Message clientId or clientSecret is missing or invalid");
 		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}

@@ -15,9 +15,7 @@ describe('General Tests', () => {
 		assert.equal(typeof FuelAuth, 'function');
 	});
 
-	it('clientSecret not needed for OAuth2 public app', () => {
-		let AuthClient;
-		
+	it('clientSecret not needed for OAuth2 public app', () => {	
 		var options = {
 			clientId:'client_id',
 			authUrl:'test',
@@ -28,12 +26,11 @@ describe('General Tests', () => {
 				authorizationCode: 'test'
 			}
 		};
-		AuthClient = new FuelAuth(options);
-		assert(true);
+		assert.doesNotThrow(() => new FuelAuth(options), "clientId or clientSecret is missing or invalid");
 	});
 
 
-	it('AuthorizationCode and RedirectURI are mandatory for public/web app', () => {
+	it('AuthorizationCode mandatory for public app', () => {
 		let AuthClient;
 		
 		var options = {
@@ -42,15 +39,59 @@ describe('General Tests', () => {
 			authUrl:'test',
 			authOptions:{
 				authVersion: 2,
-				applicationType: 'public'
+				applicationType: 'public',
+				redirectURI: 'test'
 			}
 		};
-		try {
-			AuthClient = new FuelAuth(options);
-			assert.fail("Should Throw Exception with Error Message RedirectURI and Authorization Code are required for Public/Web App OAuth2 Authentication");
-		} catch (err) {
-			assert.equal(err.message, 'RedirectURI and Authorization Code are required for Public/Web App OAuth2 Authentication');
-		}
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Public App OAuth2 Authentication");
+	});
+
+	it('RedirectURI mandatory for public app', () => {
+		let AuthClient;
+		
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'public',
+				authorizationCode: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Public App OAuth2 Authentication");
+	});
+
+	it('AuthorizationCode mandatory for web app', () => {
+		let AuthClient;
+		
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'web',
+				redirectURI: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Web App OAuth2 Authentication");
+	});
+
+	it('RedirectURI mandatory for web app', () => {
+		let AuthClient;
+		
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'web',
+				authorizationCode: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Web App OAuth2 Authentication");
 	});
 
 	it('should require clientId and clientSecret', () => {

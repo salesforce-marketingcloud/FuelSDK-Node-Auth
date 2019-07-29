@@ -10,9 +10,6 @@ const assert = require('assert');
 const FuelAuth = require('../lib/fuel-auth');
 
 describe('Oauth2 Payload Tests', () => {
-	let AuthClient;
-	let sampleCb;
-
 	it('auth payload should have public app attributes', () => {
 
         var options = {

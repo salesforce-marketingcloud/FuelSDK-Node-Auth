@@ -30,9 +30,7 @@ describe('General Tests', () => {
 	});
 
 
-	it('AuthorizationCode mandatory for public app', () => {
-		let AuthClient;
-		
+	it('AuthorizationCode mandatory for public app', () => {	
 		var options = {
 			clientId:'client_id',
 			clientSecret:'client_secret',
@@ -47,8 +45,6 @@ describe('General Tests', () => {
 	});
 
 	it('RedirectURI mandatory for public app', () => {
-		let AuthClient;
-		
 		var options = {
 			clientId:'client_id',
 			clientSecret:'client_secret',
@@ -63,8 +59,6 @@ describe('General Tests', () => {
 	});
 
 	it('AuthorizationCode mandatory for web app', () => {
-		let AuthClient;
-		
 		var options = {
 			clientId:'client_id',
 			clientSecret:'client_secret',
@@ -79,8 +73,6 @@ describe('General Tests', () => {
 	});
 
 	it('RedirectURI mandatory for web app', () => {
-		let AuthClient;
-		
 		var options = {
 			clientId:'client_id',
 			clientSecret:'client_secret',

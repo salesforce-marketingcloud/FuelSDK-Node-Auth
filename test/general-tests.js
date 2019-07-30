@@ -26,7 +26,7 @@ describe('General Tests', () => {
 				authorizationCode: 'test'
 			}
 		};
-		assert.doesNotThrow(() => new FuelAuth(options), "clientId or clientSecret is missing or invalid");
+		assert.doesNotThrow(() => new FuelAuth(options));
 	});
 
 

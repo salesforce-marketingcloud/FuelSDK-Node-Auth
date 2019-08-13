@@ -6,3 +6,4 @@ testing.js
 coverage/
 *.tgz
 npm-debug.log
+package-lock.json

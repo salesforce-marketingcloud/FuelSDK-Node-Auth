@@ -15,12 +15,84 @@ describe('General Tests', () => {
 		assert.equal(typeof FuelAuth, 'function');
 	});
 
+	it('clientSecret not needed for OAuth2 public app', () => {	
+		var options = {
+			clientId:'client_id',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'public',
+				redirectURI: 'test',
+				authorizationCode: 'test'
+			}
+		};
+		assert.doesNotThrow(() => new FuelAuth(options));
+	});
+
+
+	it('AuthorizationCode mandatory for public app', () => {	
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'public',
+				redirectURI: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Public App OAuth2 Authentication");
+	});
+
+	it('RedirectURI mandatory for public app', () => {
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'public',
+				authorizationCode: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Public App OAuth2 Authentication");
+	});
+
+	it('AuthorizationCode mandatory for web app', () => {
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'web',
+				redirectURI: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Web App OAuth2 Authentication");
+	});
+
+	it('RedirectURI mandatory for web app', () => {
+		var options = {
+			clientId:'client_id',
+			clientSecret:'client_secret',
+			authUrl:'test',
+			authOptions:{
+				authVersion: 2,
+				applicationType: 'web',
+				authorizationCode: 'test'
+			}
+		};
+		assert.throws(() => new FuelAuth(options), "RedirectURI and Authorization Code are required for Web App OAuth2 Authentication");
+	});
+
 	it('should require clientId and clientSecret', () => {
 		let AuthClient;
 
 		// testing with nothing passed into constructor
 		try {
 			AuthClient = new FuelAuth();
+			assert.fail("Should Throw Exception with Error Message options are required. see readme.");
 		} catch (err) {
 			assert.equal(err.message, 'options are required. see readme.');
 		}
@@ -28,6 +100,7 @@ describe('General Tests', () => {
 		// testing with clientId passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientId: 'test' });
+			assert.fail("Should Throw Exception with Error Message clientId or clientSecret is missing or invalid");
 		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}
@@ -35,6 +108,7 @@ describe('General Tests', () => {
 		// testing with clientSecret passed into constructor
 		try {
 			AuthClient = new FuelAuth({ clientSecret: 'test' });
+			assert.fail("Should Throw Exception with Error Message clientId or clientSecret is missing or invalid");
 		} catch (err) {
 			assert.equal(err.message, 'clientId or clientSecret is missing or invalid');
 		}
